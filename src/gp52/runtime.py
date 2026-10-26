@@ -1,9 +1,13 @@
 from pathlib import Path
+import os
 import numpy as np
 import torch
 
 ASSETS = Path(__file__).resolve().parent / "assets"
 ROOT = Path(__file__).resolve().parents[2]
+
+def prepared_assets():
+    return Path(os.environ.get("GP52_PREPARED_ASSETS",str(ASSETS)))
 
 def tensor(value, dtype=torch.float64):
     return torch.as_tensor(value, dtype=dtype, device="cuda").contiguous()
@@ -11,7 +15,7 @@ def tensor(value, dtype=torch.float64):
 class FlowPack:
     """Fixed, reconstructed blood flow and finite-volume input arrays."""
     def __init__(self):
-        with np.load(ASSETS / "flow.npz") as z:
+        with np.load(prepared_assets() / "flow.npz") as z:
             self.x=z["x"].copy();self.t=z["t"].copy();self.knots=z["knots"].copy()
             self.dt=float(z["dt"]);self.dx=float(z["dx"]);self.pars=z["pars"].tolist()
             for key in ["F","W0","W1","IC","basis"]:setattr(self,key,tensor(z[key]))

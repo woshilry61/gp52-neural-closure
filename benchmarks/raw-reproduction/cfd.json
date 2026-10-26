@@ -1,0 +1,186 @@
+{
+  "initial": {
+    "velocity_scale": 1.0,
+    "harmonic": 0.0,
+    "convection": true,
+    "streamline_stabilization": 1.0,
+    "newton_relaxation": 1.0,
+    "seconds": 641.7444115360267,
+    "nx": 32,
+    "nr": 24,
+    "dt": 0.001,
+    "max_relative_volume_balance": 5.2193774437663236e-05,
+    "physical_model": "Axisymmetric Navier-Stokes, P2/P1 ALE, radial quasi-static elastic-wall traction matching the Sen pressure-area law; prescribed axial end means and radially dilating end constraints",
+    "reference_inputs": "Independent numerical initial A,u at four positions and endpoint mean-velocity waveforms; no PIGNN outputs",
+    "reference_initialization": "Interpolated initial area and velocity, parabolic initial axial profile, divergence-compatible initial radial velocity",
+    "limitations": "Radial-only massless wall law; P1 moving mesh; input initial radial profile assumed from the 1D model",
+    "nonlinear_steps": 820,
+    "max_weak_divergence": 2.3106552039476523e-14,
+    "max_wall_iteration_change": 7.72357977574245e-09
+  },
+  "extended": {
+    "velocity_scale": 1.0,
+    "harmonic": 0.0,
+    "convection": true,
+    "streamline_stabilization": 1.0,
+    "newton_relaxation": 1.0,
+    "seconds": 340.295150100952,
+    "nx": 32,
+    "nr": 24,
+    "dt": 0.001,
+    "max_relative_volume_balance": 9.987319093669192e-05,
+    "physical_model": "Axisymmetric Navier-Stokes, P2/P1 ALE, radial quasi-static elastic-wall traction matching the Sen pressure-area law; prescribed axial end means and radially dilating end constraints",
+    "reference_inputs": "Independent numerical initial A,u at four positions and endpoint mean-velocity waveforms; no PIGNN outputs",
+    "reference_initialization": "Interpolated initial area and velocity, parabolic initial axial profile, divergence-compatible initial radial velocity",
+    "limitations": "Radial-only massless wall law; P1 moving mesh; input initial radial profile assumed from the 1D model",
+    "source_seconds": 641.7444115360267,
+    "continued_from": "<run>/cfd/initial",
+    "duration": 1.23,
+    "extension_boundary": "Periodically repeated endpoint waveform; continuous stored wall/fluid state",
+    "original_window_preserved_exactly": true,
+    "nonlinear_steps": 410,
+    "max_weak_divergence": 2.5325518011054008e-14,
+    "max_wall_iteration_change": 5.78106607029838e-09
+  },
+  "chemistry": {
+    "seconds": 228.44666387699544,
+    "batches": [
+      {
+        "seeds": [
+          29009,
+          29010,
+          29011,
+          29012,
+          826201,
+          826202,
+          826203,
+          826204
+        ],
+        "seconds": 228.1699801440118,
+        "metrics": {
+          "seconds": 227.7106073240284,
+          "batch": 8,
+          "nodes": 3185,
+          "diffusivity": 0.0002,
+          "conservation_interior_residual_max": 1.3938448037523725e-14,
+          "constant_preservation_residual_max": 3.79904471089704e-15,
+          "minimum_concentration": 0.16780161919996,
+          "inlets": [
+            "<run>/chemistry/inlet-29009.npz",
+            "<run>/chemistry/inlet-29010.npz",
+            "<run>/chemistry/inlet-29011.npz",
+            "<run>/chemistry/inlet-29012.npz",
+            "<run>/chemistry/inlet-826201.npz",
+            "<run>/chemistry/inlet-826202.npz",
+            "<run>/chemistry/inlet-826203.npz",
+            "<run>/chemistry/inlet-826204.npz"
+          ]
+        }
+      },
+      {
+        "seeds": [
+          826301,
+          826302,
+          826303,
+          826304,
+          826305,
+          826306,
+          826307,
+          826308
+        ],
+        "seconds": 228.44568957400043,
+        "metrics": {
+          "seconds": 227.98696481797379,
+          "batch": 8,
+          "nodes": 3185,
+          "diffusivity": 0.0002,
+          "conservation_interior_residual_max": 1.2878659935277561e-14,
+          "constant_preservation_residual_max": 3.79904471089704e-15,
+          "minimum_concentration": 0.17263920254060708,
+          "inlets": [
+            "<run>/chemistry/inlet-826301.npz",
+            "<run>/chemistry/inlet-826302.npz",
+            "<run>/chemistry/inlet-826303.npz",
+            "<run>/chemistry/inlet-826304.npz",
+            "<run>/chemistry/inlet-826305.npz",
+            "<run>/chemistry/inlet-826306.npz",
+            "<run>/chemistry/inlet-826307.npz",
+            "<run>/chemistry/inlet-826308.npz"
+          ]
+        }
+      },
+      {
+        "seeds": [
+          863601,
+          863602,
+          863603,
+          863604,
+          863605,
+          863606,
+          863607,
+          863608
+        ],
+        "seconds": 227.19087647204287,
+        "metrics": {
+          "seconds": 226.7116881730035,
+          "batch": 8,
+          "nodes": 3185,
+          "diffusivity": 0.0002,
+          "conservation_interior_residual_max": 1.3529855034248096e-14,
+          "constant_preservation_residual_max": 3.79904471089704e-15,
+          "minimum_concentration": 0.22182735486979388,
+          "inlets": [
+            "<run>/chemistry/inlet-863601.npz",
+            "<run>/chemistry/inlet-863602.npz",
+            "<run>/chemistry/inlet-863603.npz",
+            "<run>/chemistry/inlet-863604.npz",
+            "<run>/chemistry/inlet-863605.npz",
+            "<run>/chemistry/inlet-863606.npz",
+            "<run>/chemistry/inlet-863607.npz",
+            "<run>/chemistry/inlet-863608.npz"
+          ]
+        }
+      },
+      {
+        "seeds": [
+          2026102621,
+          2026102622,
+          2026102623,
+          2026102624,
+          2026102625,
+          2026102626,
+          2026102627,
+          2026102628
+        ],
+        "seconds": 226.24818248301744,
+        "metrics": {
+          "seconds": 225.79593772895169,
+          "batch": 8,
+          "nodes": 3185,
+          "diffusivity": 0.0002,
+          "conservation_interior_residual_max": 1.3363864126667371e-14,
+          "constant_preservation_residual_max": 3.79904471089704e-15,
+          "minimum_concentration": 0.05192691660972817,
+          "inlets": [
+            "<run>/chemistry/inlet-2026102621.npz",
+            "<run>/chemistry/inlet-2026102622.npz",
+            "<run>/chemistry/inlet-2026102623.npz",
+            "<run>/chemistry/inlet-2026102624.npz",
+            "<run>/chemistry/inlet-2026102625.npz",
+            "<run>/chemistry/inlet-2026102626.npz",
+            "<run>/chemistry/inlet-2026102627.npz",
+            "<run>/chemistry/inlet-2026102628.npz"
+          ]
+        }
+      }
+    ]
+  },
+  "poiseuille_check": {
+    "velocity_relative_l2": 4.335155699053826e-15,
+    "pressure_relative_l2": 2.3748589460179333e-11,
+    "iterations": 1,
+    "wall_iteration_change": 0.0,
+    "velocity_iteration_change": 4.3351556990538284e-15,
+    "weak_divergence": 5.829588543672624e-16
+  }
+}

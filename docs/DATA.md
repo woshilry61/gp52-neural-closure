@@ -7,7 +7,8 @@ calculation followed by cross-section-resolved reaction-diffusion-convection.
 The archived flow calculation used P2/P1 finite elements. The biochemical reference
 used scikit-fem and outputs every 0.001 s. The public package contains the generated
 cross-sectional labels needed to reproduce biochemical learning and evaluation;
-it does not contain the complete radial mesh archive or the full CFD generator.
+the optional [raw-input workflow](RAW_REPRODUCTION.md) now provides the project CFD
+generator and creates the full finite-element states locally.
 
 The waveform source and reconstructed flow provenance are credited in
 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). No patient data are included.

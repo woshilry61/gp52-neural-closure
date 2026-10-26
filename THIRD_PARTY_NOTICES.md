@@ -26,10 +26,14 @@ CFD reference and the blood-flow reconstruction. The reconstructed input field i
 not used as the CFD ground truth. Obtain upstream materials directly from their
 authors under their applicable terms if rebuilding that stage.
 
-This public release supports biochemical inference, evaluation and retraining from
-the supplied reconstruction and generated CFD labels. It does not claim to
-reproduce the upstream blood-flow training or regenerate the full ALE CFD reference
-from a fresh clone.
+The default public example supports biochemical inference and retraining from
+prepared inputs. The optional raw-input workflow fetches this upstream revision
+directly, regenerates the independent ALE CFD reference, and trains the project's
+conservative PyTorch blood model from sparse CFD observations. This blood model
+adapts the Sen graph architecture with spline time coefficients and exact discrete
+continuity; it is not the unchanged upstream TensorFlow training experiment.
+No upstream source, waveform or original blood checkpoint is added to our Git
+history or release archives. See docs/RAW_REPRODUCTION.md.
 
 ## Modelling references
 
@@ -50,5 +54,5 @@ materials are not included.
 
 PyTorch, Triton, NumPy, SciPy and Matplotlib are installed separately and retain
 their respective licenses. No dependency source trees or virtual environments are
-bundled. The archived CFD generation used scikit-fem; it is not required for the
-released biochemical inference and evaluation commands.
+bundled. The optional CFD generator uses scikit-fem 12.0.2; it is not required for
+the released biochemical inference and evaluation commands.

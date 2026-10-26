@@ -27,12 +27,14 @@ calibrated numerical baseline.**
 - Forward evaluation and the shared 1/2/3-site inverse procedure.
 - Downloadable training, development and test labels with SHA-256 checksums.
 - Published metrics, figures and packaging-equivalence checks.
+- Raw-waveform extraction, independent ALE CFD, blood PIGNN training and complete data regeneration.
 
 This is a **neural-closure/conservative-solver hybrid**. The biochemical networks
 predict closure coefficients; the conservation equations advance concentrations.
-The research pipeline uses Sen's blood-flow PIGNN upstream. The public package
-starts from its project-generated reconstructed flow arrays and does not include
-the upstream blood-flow source or weights. See [scope and attribution](THIRD_PARTY_NOTICES.md).
+The research pipeline uses a conservative Sen-inspired blood-flow PIGNN upstream.
+The default example loads prepared reconstructed flow arrays. The optional raw-input
+workflow fetches the original upstream source separately and regenerates the CFD
+inputs and trained project models. See [scope and attribution](THIRD_PARTY_NOTICES.md).
 
 ## Requirements
 
@@ -321,6 +323,35 @@ model = Solver(
 )
 ~~~
 
+## Rebuild from raw input
+
+To regenerate the blood reconstruction and CFD datasets as well as train the
+biochemical networks, install the additional finite-element dependency and run:
+
+~~~bash
+python -m pip install -r requirements-raw.txt
+python scripts/reproduce_raw.py --output runs/from-raw
+~~~
+
+This fetches Sen's pinned original repository, extracts its raw waveform, computes
+independent CFD, trains the project's conservative blood PIGNN, generates all
+32 chemical cases, and trains/evaluates the final biochemical model. Generated
+inputs and new weights stay in the run directory.
+
+The blood model is the project's PyTorch adaptation of Sen's graph architecture.
+The unchanged original TensorFlow experiment is not a dependency of the final
+model. Geometry, physical constants, numerical closure coefficients and inverse
+regularization remain declared experiment settings.
+
+The independently verified run completed in **31.91 minutes**. All regenerated
+dataset and solver-input arrays matched the release exactly; both newly trained
+biochemical heads had identical parameter tensors, and every compared forward,
+inverse and direct-rate metric had difference **0**. Original assets were unchanged.
+
+See [raw-input reproduction](docs/RAW_REPRODUCTION.md) for the full dependency
+chain, commands, measured results and the distinction between generated inputs
+and fixed configuration.
+
 ## Repository layout
 
 ~~~text
@@ -338,7 +369,8 @@ src/gp52/
   train_*.py        transport and reaction training
   evaluate.py       forward and sparse-inverse experiments
   verify.py         packaging equivalence and physical checks
-scripts/            data download and development-only checkpoint selection
+  raw/              waveform extraction, ALE CFD, blood training and data preparation
+scripts/            downloads, complete reproduction drivers and checkpoint selection
 data/manifest.json  checksums of release data assets
 benchmarks/         machine-readable published and reproduced results
 docs/               architecture, provenance, results and figures

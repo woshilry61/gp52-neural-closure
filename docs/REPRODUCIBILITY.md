@@ -7,10 +7,13 @@
    inlet optimization.
 3. **Frozen-field equivalence:** additionally download reference-forward.npz.
 4. **Biochemical retraining:** additionally download train.npz and development.npz.
+5. **Raw-input regeneration:** fetch the upstream waveform, solve CFD, train the
+   project blood PIGNN and regenerate all biochemical inputs before retraining.
 
-Rebuilding the upstream blood-flow PIGNN and the complete ALE CFD reference is
-outside this public package. The generated input and label arrays make levels
-1-4 independently executable without access to the original research machine.
+Levels 1-4 use the released prepared inputs. Level 5 rebuilds these inputs using
+[the raw-input workflow](RAW_REPRODUCTION.md), without the original research machine.
+The final project blood model is the conservative PyTorch adaptation documented
+there; it is distinct from the unchanged upstream TensorFlow experiment.
 
 ## Environment
 
@@ -18,8 +21,10 @@ Follow the README installation sequence. The tested top-level versions are pinne
 in pyproject.toml; requirements-tested.txt records the complete verification
 environment. Use the CUDA 12.8 PyTorch index before installing the package.
 
-All numerical work runs on a CUDA GPU. NumPy-based scoring, compressed file I/O and
-bounded optimizer control also use the CPU. The archive CPU checks require no GPU:
+The biochemical solvers and neural training use CUDA. The optional raw-input
+workflow uses CPU finite-element assembly and sparse factorization for CFD.
+NumPy scoring, compressed I/O and bounded optimizer control also use the CPU.
+The archive integrity checks require no GPU:
 
 ~~~bash
 python -m unittest discover -s tests -v
@@ -87,6 +92,7 @@ their original hashes; retrained checkpoints and their logs are separate artifac
 - benchmarks/verification.json: field and physical checks.
 - benchmarks/artifact-manifest.json: distributed asset checksums.
 - data/manifest.json: downloadable data checksums.
+- benchmarks/raw-reproduction/: complete raw-input generation, training and evaluation records.
 
 Run directories and predictions are ignored by Git. Keep retraining outputs
 separate from the distributed frozen assets.

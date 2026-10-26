@@ -10,3 +10,5 @@ outputs/
 runs/
 *.log
 .release/
+
+external/

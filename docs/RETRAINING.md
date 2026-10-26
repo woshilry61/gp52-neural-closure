@@ -126,3 +126,6 @@ numerical operators, physical settings and CFD-derived labels. It does not
 rebuild Sen's blood-flow training, recalibrate the numerical baseline, or regenerate
 the full ALE CFD reference. It therefore validates the complete biochemical
 train-to-evaluation workflow within this release's documented scope.
+
+The later [raw-input validation](RAW_REPRODUCTION.md) additionally regenerates the
+blood reconstruction and CFD data before repeating this biochemical procedure.

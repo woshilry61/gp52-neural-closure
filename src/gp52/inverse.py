@@ -3,7 +3,7 @@ import time,json
 import numpy as np
 import torch
 from scipy.optimize import lsq_linear,least_squares
-from .runtime import ASSETS
+from .runtime import ASSETS,prepared_assets
 
 LOCATIONS=np.array([.006,.03,.054])
 TIMES=np.linspace(.002,.82,24)
@@ -21,7 +21,7 @@ def second_difference(knots):
 class Context:
  def __init__(self):
   torch.set_num_threads(4);torch.backends.cuda.matmul.allow_tf32=False
-  with np.load(ASSETS/"inverse-context.npz") as z:
+  with np.load(prepared_assets()/"inverse-context.npz") as z:
    for k in z.files:setattr(self,k,z[k].copy())
  def initial_guess(self,obs,scale):
   out=[]

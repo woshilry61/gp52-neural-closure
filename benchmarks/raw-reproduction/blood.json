@@ -1,0 +1,115 @@
+{
+  "cases": [
+    {
+      "name": "clean",
+      "seed": 42,
+      "loss": 0.002001935289286404,
+      "physics": 0.00043042835915382133,
+      "data": 0.0001270502970221898,
+      "regularization": 0.030100395991068486
+    },
+    {
+      "name": "clean",
+      "seed": 43,
+      "loss": 0.002000639732446584,
+      "physics": 0.00043039026941297186,
+      "data": 0.00012695197068700835,
+      "regularization": 0.03007297561635289
+    },
+    {
+      "name": "clean",
+      "seed": 44,
+      "loss": 0.00200718152014143,
+      "physics": 0.00043483566682421976,
+      "data": 0.00012715103370526616,
+      "regularization": 0.030083551626454902
+    },
+    {
+      "name": "noise0",
+      "seed": 42,
+      "loss": 0.004221504511712594,
+      "physics": 0.0006767333679832956,
+      "data": 0.0003177168956331821,
+      "regularization": 0.03676021873974773
+    },
+    {
+      "name": "noise0",
+      "seed": 43,
+      "loss": 0.004208277516717725,
+      "physics": 0.0006771093614387492,
+      "data": 0.00031627187846163993,
+      "regularization": 0.03684493706625768
+    },
+    {
+      "name": "noise0",
+      "seed": 44,
+      "loss": 0.004219057726606959,
+      "physics": 0.0006766541691010405,
+      "data": 0.000317446608808695,
+      "regularization": 0.036793746941896785
+    },
+    {
+      "name": "noise1",
+      "seed": 42,
+      "loss": 0.005956968965687764,
+      "physics": 0.0009206195582802388,
+      "data": 0.00045510760334572023,
+      "regularization": 0.048527337395032275
+    },
+    {
+      "name": "noise1",
+      "seed": 43,
+      "loss": 0.005936317471841879,
+      "physics": 0.0009272508371043116,
+      "data": 0.00045211926312846407,
+      "regularization": 0.0487874003452926
+    },
+    {
+      "name": "noise1",
+      "seed": 44,
+      "loss": 0.005940239002291518,
+      "physics": 0.0009310278319243463,
+      "data": 0.00045190706268920076,
+      "regularization": 0.04901405434751631
+    },
+    {
+      "name": "noise2",
+      "seed": 42,
+      "loss": 0.004848138141827163,
+      "physics": 0.0006674288179835593,
+      "data": 0.00038004081399812953,
+      "regularization": 0.0380301183862308
+    },
+    {
+      "name": "noise2",
+      "seed": 43,
+      "loss": 0.004845255843760241,
+      "physics": 0.0006657993029378053,
+      "data": 0.00038012444866307953,
+      "regularization": 0.037821205419164075
+    },
+    {
+      "name": "noise2",
+      "seed": 44,
+      "loss": 0.004842870823724529,
+      "physics": 0.0006705145945767738,
+      "data": 0.00037931608041144604,
+      "regularization": 0.03791954250332944
+    }
+  ],
+  "selected": {
+    "clean": 1,
+    "noise0": 4,
+    "noise1": 7,
+    "noise2": 11
+  },
+  "seconds": 72.28213388996664,
+  "device": "NVIDIA GeForce RTX 5090",
+  "initialization": "Random, independent of hidden boundary waveforms",
+  "training_files": [
+    "blood-observations.npz",
+    "blood-observations.json"
+  ],
+  "known_initial_information": "A(inlet,t=0)=1.02*A0, geometry and wall law",
+  "selection": "Training physics/data objective only"
+}

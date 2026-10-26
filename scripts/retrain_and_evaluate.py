@@ -16,6 +16,8 @@ def sha(path):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output", type=Path, default=Path("runs/from-scratch"))
+    p.add_argument("--prepared-data", type=Path, help="Regenerated partitions and manifest.json")
+    p.add_argument("--prepared-assets", type=Path, help="Regenerated flow.npz and inverse-context.npz")
     args = p.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -31,9 +33,11 @@ def main():
     env = {**os.environ, "GP52_DATA_DIR": str(data), "OPENBLAS_NUM_THREADS": "4",
            "OMP_NUM_THREADS": "4", "PYTHONUNBUFFERED": "1",
            "PYTHONPATH": str(ROOT / "src")}
+    if args.prepared_assets is not None:
+        env["GP52_PREPARED_ASSETS"] = str(args.prepared_assets.resolve())
     start = time.perf_counter()
     record = {"status": "running", "stages": [],
-              "scope": "Biochemical retraining from released fixed flow and CFD labels",
+              "scope": ("Biochemical retraining from regenerated flow and CFD labels" if args.prepared_data else "Biochemical retraining from released fixed flow and CFD labels"),
               "original_assets_sha256": expected,
               "source_commit": subprocess.check_output(
                   ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
@@ -42,7 +46,9 @@ def main():
                   for folder in ["src/gp52", "scripts"]
                   for f in sorted((ROOT / folder).glob("*.py"))},
               "acceptance_absolute_relative_L2_tolerance": 0.0005,
-              "test_data_downloaded_after_selection": False}
+              "test_data_downloaded_after_selection": False,
+              "data_source": "regenerated" if args.prepared_data else "released datasets",
+              "prepared_input_files_sha256": ({name: sha(args.prepared_assets/name) for name in ["flow.npz","inverse-context.npz"]} if args.prepared_assets else {})}
     def save():
         (out / "pipeline.json").write_text(json.dumps(record, indent=2) + "\n")
     def run(name, arguments):
@@ -65,8 +71,12 @@ def main():
     save()
     try:
         for split in ["train", "development"]:
-            run("download-" + split, ["scripts/download_data.py", "--split", split,
-                                      "--destination", data])
+            if args.prepared_data:
+                run("stage-" + split, ["scripts/stage_generated.py", "--source", args.prepared_data,
+                                       "--split", split, "--destination", data])
+            else:
+                run("download-" + split, ["scripts/download_data.py", "--split", split,
+                                          "--destination", data])
         import torch
         record["environment"] = {"python": sys.version.split()[0],
                                  "torch": torch.__version__,
@@ -93,12 +103,16 @@ def main():
         record["selection"] = json.loads((reaction / "selected.json").read_text())
         record["test_data_downloaded_after_selection"] = True
         save()
-        run("download-test", ["scripts/download_data.py", "--split", "test",
-                              "--destination", data])
+        if args.prepared_data:
+            run("stage-test", ["scripts/stage_generated.py", "--source", args.prepared_data,
+                              "--split", "test", "--destination", data])
+        else:
+            run("download-test", ["scripts/download_data.py", "--split", "test",
+                                  "--destination", data])
         run("evaluate", ["-m", "gp52.evaluate", "--methods", "C1", "GG", "retrained",
                          "--transport-weights", checkpoint,
                          "--reaction-weights", reaction / "reaction.pt",
-                         "--inverse", "--verify-reference",
+                         "--inverse", *(["--verify-reference"] if not args.prepared_assets else []),
                          "--output", out / "evaluation"])
         run("compare", ["scripts/compare_retraining.py", "--run-directory", out])
         verify_assets()

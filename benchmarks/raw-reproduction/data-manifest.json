@@ -1,0 +1,17 @@
+{
+  "train.npz": {
+    "sha256": "641eebf4ad387b854031b22bcdbc6d8b310d4d2693de99cfe73a35fed1cfb28a",
+    "bytes": 32982106,
+    "cases": 16
+  },
+  "development.npz": {
+    "sha256": "ea9f11c167eead832178e5200d4c053af4a90b28651552b81d786d3b47cad39c",
+    "bytes": 16500724,
+    "cases": 8
+  },
+  "test.npz": {
+    "sha256": "b8ab55b617dde72e47153cb68866a567aaa39156c758c4b1a6fd5ea6b8c96d79",
+    "bytes": 16508460,
+    "cases": 8
+  }
+}

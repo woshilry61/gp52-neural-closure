@@ -2,7 +2,7 @@
 import numpy as np
 import torch
 from torch import nn
-from .runtime import FlowPack,ASSETS,tensor
+from .runtime import FlowPack,ASSETS,tensor,prepared_assets
 from .networks import LocalGraph,LocalMLP
 
 THETA=[.7873817261695291,-.09295961516979014,-.05423938854938835,-1.2230866117405637,-.07015216488900271]
@@ -41,7 +41,7 @@ class Rollout(nn.Module):
         b=FlowPack()
         self.N=b.N;self.E=b.N+1;self.T=b.T;self.dt=b.dt;self.dx=b.dx
         self.S=self.N+self.channels*self.E;self.x=b.x;self.t=b.t;self.basetau=b.tau
-        with np.load(ASSETS/"flow.npz") as z:
+        with np.load(prepared_assets()/"flow.npz") as z:
             for key in z.files:
                 if key.startswith("buffer_"):
                     self.register_buffer(key[7:],tensor(z[key],dtype))

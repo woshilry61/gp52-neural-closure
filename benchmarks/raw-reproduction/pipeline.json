@@ -1,0 +1,1460 @@
+{
+  "status": "completed",
+  "stages": [
+    {
+      "name": "fetch-sen",
+      "arguments": [
+        "scripts/fetch_sen.py",
+        "--destination",
+        "<run>/upstream/sen2024"
+      ],
+      "seconds": 2.6428692910121754,
+      "returncode": 0
+    },
+    {
+      "name": "extract",
+      "arguments": [
+        "-m",
+        "gp52.raw.extract",
+        "--source",
+        "<run>/upstream/sen2024/PIGNN_1_artery/Snaps/sim_1_1.his",
+        "--output",
+        "<run>/raw/waveform.npz"
+      ],
+      "seconds": 0.07603674102574587,
+      "returncode": 0
+    },
+    {
+      "name": "cfd-flow",
+      "arguments": [
+        "-m",
+        "gp52.raw.cfd_flow",
+        "--source",
+        "<run>/raw/waveform.npz",
+        "--output",
+        "<run>/cfd/initial",
+        "--nx",
+        "32",
+        "--nr",
+        "24",
+        "--dt",
+        "0.001",
+        "--duration",
+        "0.82"
+      ],
+      "seconds": 642.1605762669351,
+      "returncode": 0
+    },
+    {
+      "name": "extend-flow",
+      "arguments": [
+        "-m",
+        "gp52.raw.extend_flow",
+        "--source",
+        "<run>/cfd/initial",
+        "--waveform",
+        "<run>/raw/waveform.npz",
+        "--output",
+        "<run>/cfd/extended",
+        "--duration",
+        "1.23"
+      ],
+      "seconds": 340.6387897740351,
+      "returncode": 0
+    },
+    {
+      "name": "blood-observations",
+      "arguments": [
+        "-m",
+        "gp52.raw.observations",
+        "--flow",
+        "<run>/cfd/extended/flow.npz",
+        "--output",
+        "<run>/blood-observations"
+      ],
+      "seconds": 0.20736216998193413,
+      "returncode": 0
+    },
+    {
+      "name": "train-blood",
+      "arguments": [
+        "-m",
+        "gp52.raw.train_blood",
+        "--data",
+        "<run>/blood-observations",
+        "--output",
+        "<run>/blood",
+        "--adam",
+        "20000",
+        "--lbfgs",
+        "15000"
+      ],
+      "seconds": 75.45842181402259,
+      "returncode": 0
+    },
+    {
+      "name": "cfd-labels",
+      "arguments": [
+        "-m",
+        "gp52.raw.generate_labels",
+        "--flow",
+        "<run>/cfd/extended",
+        "--output",
+        "<run>/chemistry"
+      ],
+      "seconds": 229.1966737320181,
+      "returncode": 0
+    },
+    {
+      "name": "prepare-assets",
+      "arguments": [
+        "-m",
+        "gp52.raw.prepare_assets",
+        "--blood",
+        "<run>/blood",
+        "--output",
+        "<run>/assets"
+      ],
+      "seconds": 1.955624492955394,
+      "returncode": 0
+    },
+    {
+      "name": "export-data",
+      "arguments": [
+        "-m",
+        "gp52.raw.export_data",
+        "--references",
+        "<run>/chemistry",
+        "--assets",
+        "<run>/assets",
+        "--output",
+        "<run>/data"
+      ],
+      "seconds": 3.5780227039940655,
+      "returncode": 0
+    },
+    {
+      "name": "biochemical-retraining",
+      "arguments": [
+        "scripts/retrain_and_evaluate.py",
+        "--output",
+        "<run>/biochemical",
+        "--prepared-data",
+        "<run>/data",
+        "--prepared-assets",
+        "<run>/assets"
+      ],
+      "seconds": 688.0553666439373,
+      "returncode": 0
+    },
+    {
+      "name": "validate",
+      "arguments": [
+        "scripts/validate_raw_reproduction.py",
+        "--run-directory",
+        "<run>"
+      ],
+      "seconds": 5.945127607905306,
+      "returncode": 0
+    }
+  ],
+  "source_commit": "9c9e6788215b95510008cc34f7e638b217763588",
+  "input": "Pinned upstream sim_1_1.his, declared geometry/physics, split seeds and frozen numerical configuration",
+  "seconds": 1914.4831560399616,
+  "validation": {
+    "passed": true,
+    "data_comparison": {
+      "train": {
+        "seeds": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            16
+          ],
+          "dtype": "int64"
+        },
+        "amps": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            16,
+            7
+          ],
+          "dtype": "float64"
+        },
+        "y": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            16,
+            3,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "area": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            16,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "reaction_physical": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            16,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "reaction_discrete": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            16,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "rate_features": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            16,
+            615,
+            41,
+            10
+          ],
+          "dtype": "float32"
+        },
+        "exact_observations": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            16,
+            2,
+            3,
+            24
+          ],
+          "dtype": "float64"
+        }
+      },
+      "development": {
+        "seeds": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8
+          ],
+          "dtype": "int64"
+        },
+        "amps": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            7
+          ],
+          "dtype": "float64"
+        },
+        "y": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            3,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "area": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "reaction_physical": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "reaction_discrete": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "rate_features": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            615,
+            41,
+            10
+          ],
+          "dtype": "float32"
+        },
+        "exact_observations": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            2,
+            3,
+            24
+          ],
+          "dtype": "float64"
+        }
+      },
+      "test": {
+        "seeds": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8
+          ],
+          "dtype": "int64"
+        },
+        "amps": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            7
+          ],
+          "dtype": "float64"
+        },
+        "y": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            3,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "area": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "reaction_physical": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "reaction_discrete": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            41,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "rate_features": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            615,
+            41,
+            10
+          ],
+          "dtype": "float32"
+        },
+        "exact_observations": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8,
+            2,
+            3,
+            24
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "prepared_inputs_comparison": {
+      "flow.npz": {
+        "F": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            1,
+            616,
+            6,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "IX": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            1,
+            616,
+            64
+          ],
+          "dtype": "int32"
+        },
+        "W0": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            1,
+            616,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "W1": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            1,
+            616,
+            64
+          ],
+          "dtype": "float64"
+        },
+        "IC": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            3,
+            41
+          ],
+          "dtype": "float64"
+        },
+        "basis": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            7,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "x": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            41
+          ],
+          "dtype": "float64"
+        },
+        "xf": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            42
+          ],
+          "dtype": "float64"
+        },
+        "t": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            616
+          ],
+          "dtype": "float64"
+        },
+        "knots": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            7
+          ],
+          "dtype": "float64"
+        },
+        "dt": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [],
+          "dtype": "float64"
+        },
+        "dx": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [],
+          "dtype": "float64"
+        },
+        "pars": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            8
+          ],
+          "dtype": "float64"
+        },
+        "buffer_area": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            616,
+            41
+          ],
+          "dtype": "float32"
+        },
+        "buffer_af": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            615,
+            42
+          ],
+          "dtype": "float32"
+        },
+        "buffer_q": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            615,
+            42
+          ],
+          "dtype": "float32"
+        },
+        "buffer_basis": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            7,
+            616
+          ],
+          "dtype": "float32"
+        },
+        "buffer_initial": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            3,
+            41
+          ],
+          "dtype": "float32"
+        },
+        "buffer_baseamp": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            615,
+            42
+          ],
+          "dtype": "float32"
+        },
+        "buffer_features": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            615,
+            42,
+            8
+          ],
+          "dtype": "float32"
+        },
+        "buffer_advection": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            615,
+            42,
+            42
+          ],
+          "dtype": "float32"
+        },
+        "buffer_gradient": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            42,
+            41
+          ],
+          "dtype": "float32"
+        },
+        "buffer_divergence": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            41,
+            42
+          ],
+          "dtype": "float32"
+        },
+        "buffer_inside": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            42
+          ],
+          "dtype": "float32"
+        }
+      },
+      "inverse-context.npz": {
+        "x": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            41
+          ],
+          "dtype": "float64"
+        },
+        "t": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            616
+          ],
+          "dtype": "float64"
+        },
+        "basis": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            7,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "wx": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            3,
+            41
+          ],
+          "dtype": "float64"
+        },
+        "wt": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            24,
+            616
+          ],
+          "dtype": "float64"
+        },
+        "R": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            5,
+            7
+          ],
+          "dtype": "float64"
+        },
+        "h0": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            72
+          ],
+          "dtype": "float64"
+        },
+        "hb": {
+          "max_absolute": 0.0,
+          "relative_l2": 0.0,
+          "shape": [
+            72,
+            7
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "metric_differences": {
+      "forward-C1-primary": 0.0,
+      "forward-C1-full": 0.0,
+      "inverse-one-C1-primary": 0.0,
+      "inverse-one-C1-full": 0.0,
+      "inverse-two-C1-primary": 0.0,
+      "inverse-two-C1-full": 0.0,
+      "inverse-three-C1-primary": 0.0,
+      "inverse-three-C1-full": 0.0,
+      "forward-GG-primary": 0.0,
+      "forward-GG-full": 0.0,
+      "inverse-one-GG-primary": 0.0,
+      "inverse-one-GG-full": 0.0,
+      "inverse-two-GG-primary": 0.0,
+      "inverse-two-GG-full": 0.0,
+      "inverse-three-GG-primary": 0.0,
+      "inverse-three-GG-full": 0.0,
+      "forward-retrained-primary": 0.0,
+      "forward-retrained-full": 0.0,
+      "inverse-one-retrained-primary": 0.0,
+      "inverse-one-retrained-full": 0.0,
+      "inverse-two-retrained-primary": 0.0,
+      "inverse-two-retrained-full": 0.0,
+      "inverse-three-retrained-primary": 0.0,
+      "inverse-three-retrained-full": 0.0,
+      "reaction-rate-primary": 0.0,
+      "reaction-rate-full": 0.0
+    },
+    "maximum_data_difference": 0.0,
+    "maximum_prepared_input_difference": 0.0,
+    "maximum_metric_difference": 0.0,
+    "thresholds": {
+      "data_absolute": 1e-08,
+      "prepared_inputs_absolute": 1e-05,
+      "relative_L2_metric_absolute": 0.0005
+    },
+    "original_assets_unchanged": true,
+    "blood_selected": {
+      "clean": 1,
+      "noise0": 4,
+      "noise1": 7,
+      "noise2": 11
+    },
+    "blood_seconds": 72.28213388996664,
+    "blood_continuity_residual": 7.231628490478315e-17,
+    "blood_gpu_utilization_mean": 67.86301369863014,
+    "cfd_chemistry_cases": 32,
+    "biochemical_comparison": {
+      "tolerance_absolute_relative_L2": 0.0005,
+      "tolerance_percentage_points": 0.05,
+      "maximum_metric_difference": 0.0,
+      "within_tolerance": true,
+      "within_frozen_evaluation_tolerance": true,
+      "metric_differences": {
+        "forward-primary": 0.0,
+        "forward-full": 0.0,
+        "inverse-one-primary": 0.0,
+        "inverse-one-full": 0.0,
+        "inverse-two-primary": 0.0,
+        "inverse-two-full": 0.0,
+        "inverse-three-primary": 0.0,
+        "inverse-three-full": 0.0,
+        "reaction-rate-primary": 0.0,
+        "reaction-rate-full": 0.0
+      },
+      "weights": {
+        "transport": {
+          "released_state_sha256": "4102ddfa267808f5168775174e138c62ee7b371542e3816ea6a9f7d21416676a",
+          "retrained_state_sha256": "4102ddfa267808f5168775174e138c62ee7b371542e3816ea6a9f7d21416676a",
+          "tensor_max_abs_difference": 0.0,
+          "identical": true
+        },
+        "reaction": {
+          "released_state_sha256": "fc0e3e1d810ce75770ae3c89a360d3b5bc159eb95a847d9ff3a061cbd38b09d3",
+          "retrained_state_sha256": "fc0e3e1d810ce75770ae3c89a360d3b5bc159eb95a847d9ff3a061cbd38b09d3",
+          "tensor_max_abs_difference": 0.0,
+          "identical": true
+        }
+      },
+      "forward": {
+        "C1": {
+          "primary": {
+            "mean": [
+              0.04936041446099475,
+              0.019159067250113793,
+              0.018203819925821745
+            ],
+            "cases": [
+              [
+                0.04942342227164659,
+                0.0203326465540247,
+                0.018292561178652734
+              ],
+              [
+                0.045930508869774574,
+                0.020871002461997034,
+                0.01785399798250542
+              ],
+              [
+                0.05590262912094236,
+                0.021975236159854424,
+                0.020317356688332667
+              ],
+              [
+                0.03906486115367975,
+                0.01730666642021482,
+                0.011443567615061897
+              ],
+              [
+                0.05738644006982672,
+                0.01586435727173858,
+                0.023693789078871055
+              ],
+              [
+                0.04311231885025764,
+                0.021858094656694742,
+                0.01672001915917438
+              ],
+              [
+                0.05200074426504533,
+                0.01698696274833319,
+                0.018197412512197288
+              ],
+              [
+                0.05206239108678503,
+                0.018077571728052865,
+                0.019111855191778514
+              ]
+            ]
+          },
+          "full": {
+            "mean": [
+              0.045891762973327886,
+              0.02481262625844935,
+              0.014322899767333325
+            ],
+            "cases": [
+              [
+                0.0541210366075799,
+                0.025149334340173097,
+                0.015622336807956405
+              ],
+              [
+                0.049238948921086156,
+                0.02621408615068705,
+                0.014090612975924162
+              ],
+              [
+                0.05087419113346442,
+                0.026584897521480223,
+                0.013626753762714914
+              ],
+              [
+                0.0460342391759595,
+                0.022583082674247662,
+                0.010996723176416198
+              ],
+              [
+                0.04900919316923716,
+                0.02041024293406305,
+                0.018022107107946127
+              ],
+              [
+                0.038907724936842546,
+                0.029142303326870577,
+                0.013787102900549516
+              ],
+              [
+                0.03946291965180488,
+                0.023744228509360796,
+                0.011410039113015254
+              ],
+              [
+                0.039485850190648555,
+                0.024672834610712364,
+                0.01702752229414404
+              ]
+            ]
+          },
+          "mass_defect": 2.8015395384466365e-15,
+          "minimum": 0.0
+        },
+        "GG": {
+          "primary": {
+            "mean": [
+              0.021425694848717855,
+              0.014285959410655752,
+              0.0046121931366738785
+            ],
+            "cases": [
+              [
+                0.020138482153895923,
+                0.014330140714066473,
+                0.0039498931576124946
+              ],
+              [
+                0.022120177230487,
+                0.015467516937433413,
+                0.004472687056186322
+              ],
+              [
+                0.022956618440842968,
+                0.01566822182484097,
+                0.005162152380902523
+              ],
+              [
+                0.02135023683272003,
+                0.013656335026222348,
+                0.004363936562423126
+              ],
+              [
+                0.020892678798263675,
+                0.011780168825366541,
+                0.003924440848948454
+              ],
+              [
+                0.02079835736588386,
+                0.016132016963790054,
+                0.004661846080764672
+              ],
+              [
+                0.022028494709804912,
+                0.014197976812901508,
+                0.006061435396257255
+              ],
+              [
+                0.021120513257844486,
+                0.013055298180624703,
+                0.004301153610296183
+              ]
+            ]
+          },
+          "full": {
+            "mean": [
+              0.020924529527897848,
+              0.015518003328359911,
+              0.004124195477175314
+            ],
+            "cases": [
+              [
+                0.02355577999432056,
+                0.015350801383687537,
+                0.004534966564131832
+              ],
+              [
+                0.024564682771983818,
+                0.01635778964533559,
+                0.004271120235967198
+              ],
+              [
+                0.022141111490492603,
+                0.016440279400122132,
+                0.00424954597059077
+              ],
+              [
+                0.02469904578055792,
+                0.014687460853044072,
+                0.005389903908924894
+              ],
+              [
+                0.019626737394666985,
+                0.012687180124351745,
+                0.002859569533422127
+              ],
+              [
+                0.019201572850706,
+                0.018025423044523613,
+                0.0037052032085888764
+              ],
+              [
+                0.016861397274250983,
+                0.015691751082294998,
+                0.004659001433868286
+              ],
+              [
+                0.016745908666203898,
+                0.014903341093519599,
+                0.0033242529619085274
+              ]
+            ]
+          },
+          "mass_defect": 2.5860364970276644e-15,
+          "minimum": 0.0
+        },
+        "retrained": {
+          "primary": {
+            "mean": [
+              0.021425694848717855,
+              0.014285959410655752,
+              0.0046121931366738785
+            ],
+            "cases": [
+              [
+                0.020138482153895923,
+                0.014330140714066473,
+                0.0039498931576124946
+              ],
+              [
+                0.022120177230487,
+                0.015467516937433413,
+                0.004472687056186322
+              ],
+              [
+                0.022956618440842968,
+                0.01566822182484097,
+                0.005162152380902523
+              ],
+              [
+                0.02135023683272003,
+                0.013656335026222348,
+                0.004363936562423126
+              ],
+              [
+                0.020892678798263675,
+                0.011780168825366541,
+                0.003924440848948454
+              ],
+              [
+                0.02079835736588386,
+                0.016132016963790054,
+                0.004661846080764672
+              ],
+              [
+                0.022028494709804912,
+                0.014197976812901508,
+                0.006061435396257255
+              ],
+              [
+                0.021120513257844486,
+                0.013055298180624703,
+                0.004301153610296183
+              ]
+            ]
+          },
+          "full": {
+            "mean": [
+              0.020924529527897848,
+              0.015518003328359911,
+              0.004124195477175314
+            ],
+            "cases": [
+              [
+                0.02355577999432056,
+                0.015350801383687537,
+                0.004534966564131832
+              ],
+              [
+                0.024564682771983818,
+                0.01635778964533559,
+                0.004271120235967198
+              ],
+              [
+                0.022141111490492603,
+                0.016440279400122132,
+                0.00424954597059077
+              ],
+              [
+                0.02469904578055792,
+                0.014687460853044072,
+                0.005389903908924894
+              ],
+              [
+                0.019626737394666985,
+                0.012687180124351745,
+                0.002859569533422127
+              ],
+              [
+                0.019201572850706,
+                0.018025423044523613,
+                0.0037052032085888764
+              ],
+              [
+                0.016861397274250983,
+                0.015691751082294998,
+                0.004659001433868286
+              ],
+              [
+                0.016745908666203898,
+                0.014903341093519599,
+                0.0033242529619085274
+              ]
+            ]
+          },
+          "mass_defect": 2.5860364970276644e-15,
+          "minimum": 0.0
+        }
+      },
+      "inverse": {
+        "one": {
+          "C1": {
+            "clean": {
+              "primary_mean": [
+                0.10333091691337074,
+                0.01881929838857376,
+                0.04562786758183836
+              ],
+              "full_mean": [
+                0.3097665413591095,
+                0.0657719570810428,
+                0.11082460047369228
+              ],
+              "mean_inlet_error": 0.4389916832091256,
+              "converged": 8,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.1095362064085975,
+                0.019622766584020426,
+                0.045847764638859145
+              ],
+              "full_mean": [
+                0.31616967302128657,
+                0.06702536996126128,
+                0.12629858104473762
+              ],
+              "mean_inlet_error": 0.46133876389717043,
+              "converged": 24,
+              "cases": 24
+            }
+          },
+          "GG": {
+            "clean": {
+              "primary_mean": [
+                0.05857854993855199,
+                0.014802474220312698,
+                0.018161507180381137
+              ],
+              "full_mean": [
+                0.11740580383231675,
+                0.025947562445239436,
+                0.041102254621373964
+              ],
+              "mean_inlet_error": 0.20310459977846312,
+              "converged": 8,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.11537511081356094,
+                0.017103028559840295,
+                0.040213111346609896
+              ],
+              "full_mean": [
+                0.33624299136778896,
+                0.06406856752505445,
+                0.12716895500003253
+              ],
+              "mean_inlet_error": 0.5151986248582956,
+              "converged": 24,
+              "cases": 24
+            }
+          },
+          "retrained": {
+            "clean": {
+              "primary_mean": [
+                0.05857854993855199,
+                0.014802474220312698,
+                0.018161507180381137
+              ],
+              "full_mean": [
+                0.11740580383231675,
+                0.025947562445239436,
+                0.041102254621373964
+              ],
+              "mean_inlet_error": 0.20310459977846312,
+              "converged": 8,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.11537511081356094,
+                0.017103028559840295,
+                0.040213111346609896
+              ],
+              "full_mean": [
+                0.33624299136778896,
+                0.06406856752505445,
+                0.12716895500003253
+              ],
+              "mean_inlet_error": 0.5151986248582956,
+              "converged": 24,
+              "cases": 24
+            }
+          }
+        },
+        "two": {
+          "C1": {
+            "clean": {
+              "primary_mean": [
+                0.04561395233288109,
+                0.018532321394775276,
+                0.017875117225608642
+              ],
+              "full_mean": [
+                0.04449280728429669,
+                0.024561155402269722,
+                0.014921603054233793
+              ],
+              "mean_inlet_error": 0.05159684221502723,
+              "converged": 6,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.045952713197450513,
+                0.018821191103793013,
+                0.01782459227479958
+              ],
+              "full_mean": [
+                0.05504624061576561,
+                0.025737676771366347,
+                0.019044161959717608
+              ],
+              "mean_inlet_error": 0.06765943977769702,
+              "converged": 24,
+              "cases": 24
+            }
+          },
+          "GG": {
+            "clean": {
+              "primary_mean": [
+                0.021652805535421524,
+                0.014077638164036123,
+                0.006785073120272454
+              ],
+              "full_mean": [
+                0.022481812859296103,
+                0.01550894178355121,
+                0.006488248099111869
+              ],
+              "mean_inlet_error": 0.021870953878577404,
+              "converged": 8,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.024016314998821925,
+                0.014304120090827384,
+                0.008090382947111618
+              ],
+              "full_mean": [
+                0.037740614110349215,
+                0.016867622720995717,
+                0.012559180709666528
+              ],
+              "mean_inlet_error": 0.04499193535613601,
+              "converged": 24,
+              "cases": 24
+            }
+          },
+          "retrained": {
+            "clean": {
+              "primary_mean": [
+                0.021652805535421524,
+                0.014077638164036123,
+                0.006785073120272454
+              ],
+              "full_mean": [
+                0.022481812859296103,
+                0.01550894178355121,
+                0.006488248099111869
+              ],
+              "mean_inlet_error": 0.021870953878577404,
+              "converged": 8,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.024016314998821925,
+                0.014304120090827384,
+                0.008090382947111618
+              ],
+              "full_mean": [
+                0.037740614110349215,
+                0.016867622720995717,
+                0.012559180709666528
+              ],
+              "mean_inlet_error": 0.04499193535613601,
+              "converged": 24,
+              "cases": 24
+            }
+          }
+        },
+        "three": {
+          "C1": {
+            "clean": {
+              "primary_mean": [
+                0.04530114717207604,
+                0.018435957753095557,
+                0.01794523644464732
+              ],
+              "full_mean": [
+                0.044374286221512065,
+                0.024491892708315442,
+                0.014880546760717784
+              ],
+              "mean_inlet_error": 0.05153171723598646,
+              "converged": 7,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.045451272382214115,
+                0.018578619036165162,
+                0.01803238944770762
+              ],
+              "full_mean": [
+                0.055000327123109684,
+                0.025567893950497567,
+                0.01886305969061681
+              ],
+              "mean_inlet_error": 0.06831729618849025,
+              "converged": 24,
+              "cases": 24
+            }
+          },
+          "GG": {
+            "clean": {
+              "primary_mean": [
+                0.021449638712827932,
+                0.014017637389678119,
+                0.00652738562201492
+              ],
+              "full_mean": [
+                0.022367337247214316,
+                0.015454335747134123,
+                0.006409236245901217
+              ],
+              "mean_inlet_error": 0.022074048467369673,
+              "converged": 8,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.02348831270293135,
+                0.01415674531639418,
+                0.007461177446411775
+              ],
+              "full_mean": [
+                0.03750523959629863,
+                0.016770843596199087,
+                0.012306653288330414
+              ],
+              "mean_inlet_error": 0.045398472681611395,
+              "converged": 24,
+              "cases": 24
+            }
+          },
+          "retrained": {
+            "clean": {
+              "primary_mean": [
+                0.021449638712827932,
+                0.014017637389678119,
+                0.00652738562201492
+              ],
+              "full_mean": [
+                0.022367337247214316,
+                0.015454335747134123,
+                0.006409236245901217
+              ],
+              "mean_inlet_error": 0.022074048467369673,
+              "converged": 8,
+              "cases": 8
+            },
+            "noisy": {
+              "primary_mean": [
+                0.02348831270293135,
+                0.01415674531639418,
+                0.007461177446411775
+              ],
+              "full_mean": [
+                0.03750523959629863,
+                0.016770843596199087,
+                0.012306653288330414
+              ],
+              "mean_inlet_error": 0.045398472681611395,
+              "converged": 24,
+              "cases": 24
+            }
+          }
+        }
+      },
+      "direct_reaction": {
+        "GG": {
+          "primary": [
+            0.0029842153007500994
+          ],
+          "full": [
+            0.0038263934277776544
+          ]
+        },
+        "retrained": {
+          "primary": [
+            0.0029842153007500994
+          ],
+          "full": [
+            0.0038263934277776544
+          ]
+        }
+      },
+      "note": "Comparison is reporting only; test results do not select or modify weights."
+    },
+    "input_provenance": "Raw waveform downloaded at the pinned upstream revision; no archived blood checkpoint or CFD label used by generation/training.",
+    "fixed_configuration": "Published numerical closure coefficients, physical settings and inverse regularization are declared experiment constants; historical exploratory coefficient searches are not repeated.",
+    "executed_source_snapshots_match": {
+      "cfd/initial/executed-source.py": true,
+      "cfd/extended/executed-source.py": true,
+      "blood/executed-source.py": true,
+      "chemistry/batch-29009/executed-source.py": true,
+      "chemistry/batch-863601/executed-source.py": true,
+      "chemistry/batch-826301/executed-source.py": true,
+      "chemistry/batch-2026102621/executed-source.py": true
+    },
+    "source_commit_note": "Pipeline source_commit is the checkout base revision; source_sha256 identifies the package and scripts used for this run.",
+    "source_sha256": {
+      "src/gp52/__init__.py": "a021a89a439aae18b3f394841cd4c39dc2f1c2686b9f9bfdbb5a5a8ac4bacf82",
+      "src/gp52/baseline.py": "4728844c75c7a2811ba3f62086cc5b3e948288bcccd64e403ba30afee864fe16",
+      "src/gp52/corrector.py": "5f5d540a0bda820a19b05f6413090f1732755e81c1fff7c81f859bfc37f7057d",
+      "src/gp52/data.py": "2125a9e1eb931ea10febbeb5b8790b635f8abe9beb8951d2c113a7921d9c62f1",
+      "src/gp52/demo.py": "989a0db88a18c0494cd2952e884d0b2b645435fe88091e0bf7748bbbd950368d",
+      "src/gp52/evaluate.py": "5becfb6936fa0f0c6d88404bbeaa11454c2dc554026ea346595ff26c16837835",
+      "src/gp52/inference.py": "b02edfe1d501e4efc7b6a474366b1a8f5d87ec8ebf04985b9e3fdb5b728a72fa",
+      "src/gp52/inverse.py": "269b4dc4326c47b6481298f22380f8bb3b95672ef077cf60b1009d51b39c9ba1",
+      "src/gp52/networks.py": "e09c38ab6cc122ca7423f8792aa0623bfcbd91a9dca97b2d22b82572d3f81356",
+      "src/gp52/predictor.py": "919b8dbf419ecac4d6c4e604d5884389d51a81bd121ef5997fa62f814d766542",
+      "src/gp52/provenance.py": "02feeb450a78c7026e1be0291d00cb8ed4a7047a86d788ddd634ba660e665215",
+      "src/gp52/raw/__init__.py": "c8ffcb7a80215685a5b258d5578ce478d4f46ddb6d8be93118337112112f65cf",
+      "src/gp52/raw/axial_operators.py": "fa4483162e33defe1dda8b20da2e576ca23cddb01d23d13a92cd0891f6c2bdc5",
+      "src/gp52/raw/buffers.py": "5fc86ffe9f7a9b55a0292043e6aa8b8efb9ad8795e9271dacb7d5926c29ceeea",
+      "src/gp52/raw/cfd_chemistry.py": "9945f101526c16c4d6e77874aa434c7cf14f0be0ec6260ecd08885e381908a0f",
+      "src/gp52/raw/cfd_flow.py": "782c5209dfd3660aae71fc867c8ef5311ee29db3fa21639845621ef677a3add5",
+      "src/gp52/raw/config.py": "7bfb960c5a12b15872effe72316b12bc98148e33b6a1f10c8b6fef202a21b6bd",
+      "src/gp52/raw/export_data.py": "7b645fbc9f838a2f21461d00e29799e0286e343b46fb4ade1ababf1168eacf07",
+      "src/gp52/raw/extend_flow.py": "6e32215a7a0b21bc57ab0c4d48621e10c9994d2bbcff7d5daa51d1ffef983995",
+      "src/gp52/raw/extract.py": "a82bc95876a447a1427c351f1b6b5ad3ac2224b886e6574273273a4d0cbfaa30",
+      "src/gp52/raw/fv_operators.py": "3908af15dd4fab79fd7be1b4ebabcd68348d8506435c9b321b0c157a62758211",
+      "src/gp52/raw/generate_labels.py": "eb355439dd0d7912626884f1e753de046a1ce92c801b14e26b40b69e7a54faab",
+      "src/gp52/raw/numerical_closure.py": "de3882e837881b182bb78d1c6004b562ec4ba0944afb387ad9963cf16680c562",
+      "src/gp52/raw/numerics.py": "952ad37df1c4934a0c4560eb122efd88e14d75a2ddd80cdf60ee33d1b3cdb5ba",
+      "src/gp52/raw/observations.py": "87da43eb8546648320a3746b94ed18a05401b0ef0c4d6a282e6d654bbf3455ff",
+      "src/gp52/raw/optimization.py": "1d4cd3dfa4555f2464e6494884015937b0cc8424335c69be40d5ce0febb48c75",
+      "src/gp52/raw/prepare_assets.py": "f3eb468ff71f3657e1ab1312799c8c6779b629a4edd382179064a53702d7b363",
+      "src/gp52/raw/train_blood.py": "c60844462937907ab3380debee702f7256edc6a917128897185b7dff8349592f",
+      "src/gp52/reaction.py": "6a221e2940e5ae4a319a8d7e1dfbdcd5a35598625afbb9359e2d7c4111b73c7b",
+      "src/gp52/runtime.py": "6e50f094ba32dea9a12d88ed656490f567de54438003ae4ed101835e67aabb37",
+      "src/gp52/train_reaction.py": "95ebdc6fab00766b461cbf43baeec6056c68c7d358602c84f93b27d01e67f888",
+      "src/gp52/train_transport.py": "4c44fb526ab8905d396f1e0b6d74ac4e7c3d53a048053a8f74c68d5cd1482e1b",
+      "src/gp52/transport.py": "987f34e9b1f5d656b4cd1c34c29b8d1dfb19715655799abdb09513e3f2cba583",
+      "src/gp52/verify.py": "1e0b09f79012e6a6e5b267d015832d7bcb90cc7caf3e2c5300d266020464d6e8",
+      "scripts/compare_retraining.py": "c1cae4a4c7f265ca711eeda8c9b09e580ed85d6e0955cf636d636cdb5a9e7c32",
+      "scripts/download_data.py": "0f9681ad2381e2207ad197bcb2d7750b90d541c4973c4a0c31d7f7c3d297dbd3",
+      "scripts/fetch_sen.py": "52055091a462661fd622b064214dd340ef6eced8e59175d344dec9addfe17f30",
+      "scripts/reproduce_raw.py": "7ed04fb54f3fbbb8e6d2112f0255602beb07c54f76928e8286c558ba6b02cf88",
+      "scripts/retrain_and_evaluate.py": "14302d37e5c478eecfb8ef4a1e67acfcc9247f1dd9c0020e24f1cdce15bbeda6",
+      "scripts/select_reaction.py": "53dfbb9e071f4c226a3cfbedd4bf39a21cd7ca249c0df60b5a1b821e4ebd5a52",
+      "scripts/stage_generated.py": "0c25022d4e289153664b569e529f8c783b45f48bcf5154a98b7505932736e199",
+      "scripts/validate_raw_reproduction.py": "44a9f0cdc06420b202e448586e95dd004c4d5c423247fda8e2c1b2772c121f5c"
+    }
+  }
+}
