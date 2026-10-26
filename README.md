@@ -215,6 +215,76 @@ artifact hashes, environment checks and training commands.
 
 ## Retrain the biochemical closures
 
+### Complete train-to-evaluation workflow
+
+After installation, run the entire biochemical reproduction with one command:
+
+~~~bash
+python scripts/retrain_and_evaluate.py --output runs/from-scratch
+~~~
+
+Choose a new output directory for each run. This command:
+
+1. Downloads and verifies only the training and development partitions.
+2. Initializes a fresh graph transport head and trains it for 1,500 loop steps.
+3. Initializes a fresh graph reaction head for each of the three source-loss
+   weights (0.03, 0.3 and 3), using the newly trained, frozen transport head.
+4. Selects the reaction checkpoint using development data only.
+5. Downloads the test partition after selection.
+6. Evaluates the calibrated numerical baseline, the unchanged published model,
+   and the newly trained model on all forward and 1/2/3-site inverse cases.
+7. Verifies the identity of the weights actually loaded for evaluation and checks
+   that every distributed model/data asset remains unchanged.
+
+The run saves stage logs, training histories, new checkpoints, full prediction
+arrays, environment information, and a comparison with the published model:
+
+~~~text
+runs/from-scratch/
+  pipeline.json
+  logs/
+  transport/runs/graph/best.pt
+  reaction/reaction.pt
+  reaction/selected.json
+  evaluation/metrics.json
+  comparison.json
+~~~
+
+The published weights are never used to initialize either trained head. The
+initial output layers are zero-initialized, with fresh random hidden layers, as
+in the original procedure. Fixed prepared blood-flow arrays, numerical operators
+and prescribed physical parameters are reused. This is biochemical retraining;
+it does not retrain Sen's blood-flow network or regenerate the CFD reference.
+
+The acceptance comparison is declared before training: the largest absolute
+change in any per-inlet forward or inverse concentration error, and the reported
+mean direct reaction-rate error, must be at most 0.0005 in relative-L2 units
+(0.05 percentage points). The report separately records whether the tighter
+1e-8 frozen-evaluation tolerance is met. These comparisons do not select or
+modify the trained checkpoints.
+
+To evaluate existing new checkpoints without retraining:
+
+~~~bash
+GP52_DATA_DIR=runs/from-scratch/data python -m gp52.evaluate --methods C1 GG retrained --inverse --verify-reference \
+  --transport-weights runs/from-scratch/transport/runs/graph/best.pt \
+  --reaction-weights runs/from-scratch/reaction/reaction.pt \
+  --output outputs/retrained-evaluation
+~~~
+
+Here GG always means the unchanged published model; retrained always uses both
+explicitly supplied checkpoints. The reference check applies to the published
+methods, while comparison.json assesses the newly trained model. Test data must
+be available in data/ or in the directory specified by GP52_DATA_DIR.
+
+The independent full run completed in **11.52 minutes**. Its
+retrained parameter tensors matched the published model: **true**.
+The largest compared metric difference was **0** in relative-L2 units.
+See [the full retraining validation](docs/RETRAINING.md) for measured GPU use,
+all results, new checkpoints and reproducibility limits.
+
+### Individual training stages
+
 ~~~bash
 python scripts/download_data.py --split all
 python -m gp52.train_transport --kind graph --steps 1500 --output runs/retrained-transport

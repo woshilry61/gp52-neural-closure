@@ -4,6 +4,7 @@ import numpy as np
 import torch
 from pathlib import Path
 from .reaction import Coupled
+from .provenance import initialization_record,file_sha256
 from .runtime import ASSETS
 O=Path("runs/reaction")
 from .data import dataset,metrics,metric,tensor
@@ -24,6 +25,8 @@ def main():
     plan=json.loads((ASSETS/'splits.json').read_text());m=Coupled(a.kind,transport_kind=a.transport_kind,transport_weights=a.transport_weights)
     d=dataset(plan['train_seeds'],m);v=dataset(plan['development_seeds'],m)
     name=f'{a.kind}-{a.weight:g}';dest=O/'runs'/name;dest.mkdir(exist_ok=True)
+    initialization=initialization_record(m.reaction,2026102620)
+    initialization["transport_checkpoint_sha256"]=file_sha256(a.transport_weights or ASSETS/("transport-graph.pt" if a.transport_kind=="graph" else "transport-local.pt"))
     initial=metrics(m,v)
     norm_closure=(d['r0']-d['target']).square().mean().detach()
     baseline_rate=float(((v['r0']-v['target']).square().mean()/v['rate_norm']).sqrt())
@@ -66,6 +69,6 @@ def main():
             print(json.dumps(row),flush=True)
     torch.cuda.synchronize();updates=int(next(iter(opt.state.values()))['step']);seconds=time.perf_counter()-start;stop.set();th.join()
     m.reaction.load_state_dict(torch.load(dest/'best.pt',map_location='cuda',weights_only=True));selected=metrics(m,v)
-    report=dict(status='completed',name=name,kind=a.kind,source_weight=a.weight,initial=initial,source_pretraining=pre,baseline_physical_rate_error=baseline_rate,history=history,beststep=beststep,selected=selected,pretrain_optimizer_updates=presteps,rollout_optimizer_updates=updates,seconds=seconds,gpu_utilization_mean=float(np.mean([r['values'][0]for r in gpu])),peak_memory_MiB=torch.cuda.max_memory_allocated()/2**20,gpu_samples=gpu,train=plan['train_seeds'],development=plan['development_seeds'],parameters=sum(p.numel()for p in m.reaction.parameters()),transport_frozen=True,scheme='Causal predictor-corrector; corrector factor uses own mean-reaction predictor, no true intermediate concentrations; source loss separately uses true means')
+    report=dict(status='completed',name=name,initialization=initialization,kind=a.kind,source_weight=a.weight,initial=initial,source_pretraining=pre,baseline_physical_rate_error=baseline_rate,history=history,beststep=beststep,selected=selected,pretrain_optimizer_updates=presteps,rollout_optimizer_updates=updates,seconds=seconds,gpu_utilization_mean=float(np.mean([r['values'][0]for r in gpu])),peak_memory_MiB=torch.cuda.max_memory_allocated()/2**20,gpu_samples=gpu,train=plan['train_seeds'],development=plan['development_seeds'],parameters=sum(p.numel()for p in m.reaction.parameters()),transport_frozen=True,scheme='Causal predictor-corrector; corrector factor uses own mean-reaction predictor, no true intermediate concentrations; source loss separately uses true means')
     (O/f'results/training-{name}.json').write_text(json.dumps(report,indent=2));print('DONE',name,selected,'GPU',report['gpu_utilization_mean'],flush=True)
 if __name__=='__main__':main()

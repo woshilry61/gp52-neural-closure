@@ -10,6 +10,7 @@ from pathlib import Path
 from .runtime import ASSETS,tensor
 from .data import transport_dataset as dataset,metric
 from .transport import Rollout
+from .provenance import initialization_record
 plan=json.loads((ASSETS/"splits.json").read_text())
 TRAIN=plan["train_seeds"];VALID=plan["development_seeds"]
 O=Path("runs/transport")
@@ -41,6 +42,7 @@ def main():
         loss.backward();opt.step()
         return loss
     outdir=O/"runs"/args.kind;outdir.mkdir(exist_ok=True)
+    initialization=initialization_record(m.net,20261026)
     before=validation(m,av,yv,areav);print("INITIAL",json.dumps(before),flush=True)
     gpu=[];stop=threading.Event()
     def monitor():
@@ -74,7 +76,7 @@ def main():
     torch.cuda.synchronize();seconds=time.perf_counter()-start
     stop.set();thread.join()
     arr=np.array([v["values"] for v in gpu])
-    result=dict(status="completed",kind=args.kind,initial=before,history=history,beststep=beststep,
+    result=dict(status="completed",kind=args.kind,initialization=initialization,initial=before,history=history,beststep=beststep,
         total_optimizer_updates=args.steps+5,batch_cases=len(TRAIN),training_seconds=seconds,
         peak_memory_MiB=torch.cuda.max_memory_allocated()/2**20,
         gpu_utilization_mean=float(arr[:,0].mean()),gpu_utilization_p95=float(np.quantile(arr[:,0],.95)),

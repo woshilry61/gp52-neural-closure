@@ -60,8 +60,8 @@ outputs/ and do not overwrite the published weights.
 
 ## Training
 
-The README commands retrain the graph transport and all three graph-reaction
-source-loss weights. Selection uses development scores and source eligibility.
+The one-command workflow in the README retrains the graph transport and all three
+graph-reaction source-loss weights, then evaluates the selected new checkpoints. Selection uses development scores and source eligibility.
 The selection script requires all three candidate records. Test labels are never
 used to select checkpoints.
 
@@ -74,10 +74,10 @@ The released model uses one initialization per architecture. Repeated seeds are
 needed to quantify training variability; the reported inlet bootstrap intervals
 do not include that uncertainty.
 
-Short training smoke checks verify that the packaged loss, backward pass, optimizer
-and checkpoint saving execute. They are not new trained model releases. The
-distributed biochemical checkpoint hashes remain identical to the original final
-version.
+The initial release included short training smoke checks. The complete training
+validation, including new-weight forward and sparse-inverse evaluation, is recorded
+in [RETRAINING.md](RETRAINING.md). The distributed biochemical checkpoints retain
+their original hashes; retrained checkpoints and their logs are separate artifacts.
 
 ## Output and asset records
 

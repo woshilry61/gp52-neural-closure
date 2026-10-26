@@ -4,21 +4,34 @@ import numpy as np
 import torch
 from .runtime import ASSETS,tensor
 from .data import load_split,metric
-from .inference import get_solver
+from .inference import get_solver,Solver
+from .provenance import file_sha256,state_sha256
 from .inverse import Context,Adapter,inverse,relative,LAYOUTS
 from .transport import THETA
 
 def main():
     p=argparse.ArgumentParser(description="Evaluate frozen models on the eight published test inlets.")
-    p.add_argument("--methods",nargs="+",choices=["C1","GG","GL","LG","LL","transport","polynomial"],default=["C1","GG"])
+    p.add_argument("--methods",nargs="+",choices=["C1","GG","GL","LG","LL","transport","polynomial","retrained"],default=["C1","GG"])
     p.add_argument("--inverse",action="store_true")
     p.add_argument("--verify-reference",action="store_true")
     p.add_argument("--output",type=Path,default=Path("outputs/evaluation"))
-    a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
+    p.add_argument("--transport-weights",type=Path,help="Fresh transport checkpoint for the retrained method")
+    p.add_argument("--reaction-weights",type=Path,help="Fresh reaction checkpoint for the retrained method")
+    a=p.parse_args()
+    custom=a.transport_weights is not None or a.reaction_weights is not None
+    if ("retrained" in a.methods) != custom or (custom and (a.transport_weights is None or a.reaction_weights is None)):
+        p.error("Use --methods ... retrained with both --transport-weights and --reaction-weights.")
+    a.output.mkdir(parents=True,exist_ok=True)
     torch.set_num_threads(4);torch.backends.cuda.matmul.allow_tf32=False
     d=load_split("test");ctx=Context();truth=tensor(d["y"]);area=tensor(d["area"]);t=tensor(ctx.t)
-    models={name:get_solver(name) for name in a.methods}
+    models={name:(Solver("GG",weights=a.reaction_weights,transport_weights=a.transport_weights) if name=="retrained" else get_solver(name)) for name in a.methods}
     r={"status":"running","species":["Th","Fg","Fn"],"seeds":d["seeds"].tolist(),"windows":{"primary":.82,"full":1.23},"forward":{},"inverse":{},"direct_reaction":{}}
+    r["model_sources"]={name:{"source":"released frozen model"}for name in a.methods}
+    if custom:
+        r["model_sources"]["retrained"]={"source":"explicit newly trained checkpoints",
+            "transport_sha256":file_sha256(a.transport_weights),"reaction_sha256":file_sha256(a.reaction_weights),
+            "loaded_transport_state_sha256":state_sha256(models["retrained"].model.transport.net.state_dict()),
+            "loaded_reaction_fp32_state_sha256":state_sha256({k:v.float()for k,v in models["retrained"].model.reaction.state_dict().items()})}
     started=time.perf_counter()
     for name,model in models.items():
         y,diag=model.solve(d["amps"])
@@ -84,6 +97,7 @@ def main():
                         worst=max(worst,float(np.max(abs(np.array([x["primary_error"]for x in rows])-np.array([x["error"]for x in before])))))
         if worst>1e-8:raise AssertionError(f"Reference metric mismatch: {worst}")
         r["reference_metric_max_difference"]=worst
+        r["reference_checked_methods"]=[name for name in a.methods if name in expected["forward"] or name=="C1"]
     r.update(status="complete",seconds=time.perf_counter()-started)
     (a.output/"metrics.json").write_text(json.dumps(r,indent=2)+"\n")
     print("COMPLETE",r["seconds"],"seconds",flush=True)
