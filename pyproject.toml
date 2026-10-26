@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gp52-neural-closure"
+version = "1.0.0"
+description = "Conservative one-dimensional blood-flow-driven transport and coagulation with learned closures"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = ["numpy==1.26.4", "scipy==1.15.3", "matplotlib==3.10.8", "torch==2.10.0", "triton==3.6.0; sys_platform == 'linux'"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+gp52 = ["assets/*.npz", "assets/*.pt", "assets/*.json"]

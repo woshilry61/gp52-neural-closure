@@ -1,0 +1,9 @@
+{
+  "transport_status": "completed",
+  "transport_optimizer_updates": 7,
+  "reaction_status": "completed",
+  "reaction_source_updates": 103,
+  "reaction_trajectory_updates": 5,
+  "distributed_weights_unchanged": true,
+  "scope": "Execution smoke test only; checkpoints are not release models."
+}

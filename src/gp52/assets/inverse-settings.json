@@ -1,0 +1,164 @@
+{
+  "frozen_at_utc": "2026-10-26T12:19:51.068570+00:00",
+  "selection": "numerical baseline only; minimum mean development inlet-waveform relative L2 per layout/noise level",
+  "model_rms": [
+    [
+      0.012038452351538572,
+      0.012853334935989879,
+      0.021982193510860903
+    ],
+    [
+      0.00399131867978072,
+      0.004693954024422059,
+      0.013854591309234034
+    ]
+  ],
+  "model_rms_floor": 1e-05,
+  "lambda_grid": [
+    0,
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1
+  ],
+  "development_cases": [
+    {
+      "seed": 29009,
+      "replicate": -1,
+      "noise_std": 0.0
+    },
+    {
+      "seed": 29009,
+      "replicate": 0,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29009,
+      "replicate": 1,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29009,
+      "replicate": 2,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29009,
+      "replicate": 3,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29009,
+      "replicate": 4,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29010,
+      "replicate": -1,
+      "noise_std": 0.0
+    },
+    {
+      "seed": 29010,
+      "replicate": 0,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29010,
+      "replicate": 1,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29010,
+      "replicate": 2,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29010,
+      "replicate": 3,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29010,
+      "replicate": 4,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29011,
+      "replicate": -1,
+      "noise_std": 0.0
+    },
+    {
+      "seed": 29011,
+      "replicate": 0,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29011,
+      "replicate": 1,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29011,
+      "replicate": 2,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29011,
+      "replicate": 3,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29011,
+      "replicate": 4,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29012,
+      "replicate": -1,
+      "noise_std": 0.0
+    },
+    {
+      "seed": 29012,
+      "replicate": 0,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29012,
+      "replicate": 1,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29012,
+      "replicate": 2,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29012,
+      "replicate": 3,
+      "noise_std": 0.02
+    },
+    {
+      "seed": 29012,
+      "replicate": 4,
+      "noise_std": 0.02
+    }
+  ],
+  "seconds": 76.63941794401035,
+  "test_or_new_CFD_read": false,
+  "source_sha256": "13ad5c709c070c5f492483d5c4c854f0228eb1fb5621a7637d76a9a448380e82",
+  "lambda": {
+    "one": {
+      "clean": 1,
+      "noisy": 1
+    },
+    "two": {
+      "clean": 0,
+      "noisy": 0
+    },
+    "three": {
+      "clean": 0,
+      "noisy": 0
+    }
+  }
+}

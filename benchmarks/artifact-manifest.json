@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "assets": {
+    "src/gp52/assets/example.npz": {
+      "bytes": 744128,
+      "sha256": "dfb16eb23d2704cbe4b728ad14b08c1dd16480aa6192dd7119a9e764bd2a205f"
+    },
+    "src/gp52/assets/flow.npz": {
+      "bytes": 2755800,
+      "sha256": "1461c463c32695ed3c0c01349d9db7b8abc051d2ef109b9a8636cad8b3a8a1ef"
+    },
+    "src/gp52/assets/inverse-context.npz": {
+      "bytes": 10930,
+      "sha256": "7bcba3f1a6f784f2c34b91fc1fade0fd3b68877aee499adbf324ab50ad658d07"
+    },
+    "src/gp52/assets/inverse-settings.json": {
+      "bytes": 2780,
+      "sha256": "7dd4a92c3d96f6a73a738eba3db28eae76f6b31e31c8aed3cb283d016d66a641"
+    },
+    "src/gp52/assets/reaction-GG.pt": {
+      "bytes": 21909,
+      "sha256": "dfd719c82906429ff7b99009d5d8fe45ce83bb79c7d756ada1d4d9b308ce432a"
+    },
+    "src/gp52/assets/reaction-GL.pt": {
+      "bytes": 21162,
+      "sha256": "1d1321fdef7c4a30247d8e81bc999980dbdab2db573e35a00730f2e733a312cc"
+    },
+    "src/gp52/assets/reaction-LG.pt": {
+      "bytes": 21909,
+      "sha256": "780df8eac3c561fe88ab6ffcb833e2e4c278386962878c667b22c873c9aea827"
+    },
+    "src/gp52/assets/reaction-LL.pt": {
+      "bytes": 21162,
+      "sha256": "60c1bf6e6f0fcb6951c7e55295d396344a06fb4791647d69ab874fb68a33ca6e"
+    },
+    "src/gp52/assets/reaction-polynomial.pt": {
+      "bytes": 11526,
+      "sha256": "f989f20385b9e0981956a3fd7f00bd8e8210735a4feb83b04d6c74feffc62d0e"
+    },
+    "src/gp52/assets/splits.json": {
+      "bytes": 490,
+      "sha256": "96d033d593ed6d5b58542a27d461ea7386ed1c16288358b012593dc1f56e7b1b"
+    },
+    "src/gp52/assets/transport-graph.pt": {
+      "bytes": 21669,
+      "sha256": "88eb46dcf8457b576596050bd4f45696726659e39cced90c257e3f2ce5a10592"
+    },
+    "src/gp52/assets/transport-local.pt": {
+      "bytes": 21561,
+      "sha256": "61562a0e57259952f0c7f18a2e6a03d8786782986eeefbf6160a888b9886e815"
+    }
+  },
+  "biochemical_weights_unchanged": true,
+  "upstream_revision": "bf0ec89f0aab8a639bdd2d363dc3c0cfae770c1d"
+}

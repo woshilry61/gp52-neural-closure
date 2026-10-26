@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "models": {
+    "C1": {
+      "archived_field_max_difference": 0.0,
+      "mass_defect": 2.8015395384466365e-15,
+      "minimum": 0.0
+    },
+    "GG": {
+      "archived_field_max_difference": 0.0,
+      "mass_defect": 2.5860364970276644e-15,
+      "minimum": 0.0,
+      "parameters": 9125,
+      "causality_max_difference": 0.0,
+      "parallel_vs_sequential_max_difference": 6.186571981481315e-06
+    },
+    "GL": {
+      "archived_field_max_difference": 0.0,
+      "mass_defect": 2.8015395384466365e-15,
+      "minimum": 0.0,
+      "parameters": 9125,
+      "causality_max_difference": 0.0,
+      "parallel_vs_sequential_max_difference": 6.186571981481315e-06
+    },
+    "LG": {
+      "archived_field_max_difference": 0.0,
+      "mass_defect": 1.9395273727707484e-15,
+      "minimum": 0.0,
+      "parameters": 9125,
+      "causality_max_difference": 0.0,
+      "parallel_vs_sequential_max_difference": 6.033313602937795e-06
+    },
+    "LL": {
+      "archived_field_max_difference": 0.0,
+      "mass_defect": 2.3705334556086922e-15,
+      "minimum": 0.0,
+      "parameters": 9125,
+      "causality_max_difference": 0.0,
+      "parallel_vs_sequential_max_difference": 6.033313602937795e-06
+    }
+  }
+}
