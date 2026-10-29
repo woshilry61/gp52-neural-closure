@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><title>Unified CFD baselines</title><style>body{font:16px system-ui;color:#173040;max-width:1160px;margin:40px auto;padding:0 24px;line-height:1.65}table{border-collapse:collapse;width:100%;margin:20px 0;font-size:15px}th,td{padding:10px;text-align:left;border-bottom:1px solid #dce5eb}th{background:#edf4f7}img{max-width:100%}h1{line-height:1.25}h2{margin-top:36px}a{color:#146b82}</style><nav><a href="summary-zh.html">中文说明</a> · <a href="report.html">English report</a> · <a href="curves.html">Concentration curves</a></nav><h1>统一数据协议后的神经网络基线</h1>
+<p>本轮保持已有架构不变，用统一生成的独立 CFD 生化数据重新训练单血管、三血管和七血管基线。旧模型和旧结果已保留。</p>
+<p>三种血管使用同一批 112 条入口曲线：64 条训练、16 条验证、32 条测试，采样范围一致。每条完整网络轨迹只属于一个分组。C0 和神经网络共用血流、观测、噪声和评分规则。每种血管单独训练权重，七血管沿用三血管的结构和训练目标。</p>
+<p>这里的 CFD 仍是数值参考。此次检验的是固定血流条件下的新生化入口，尚不代表对任意血流的泛化。</p>
+<h2>已知入口时，三种物质预测如何</h2>
+<p>以下误差越低越好。重训神经网络一栏是三个种子的平均误差；旧权重一栏是在同一新参考下重放历史模型得到的结果。</p>
+<h3>单血管</h3>
+<table><thead><tr><th>方法</th><th>Th</th><th>Fg</th><th>Fn</th></tr></thead><tbody><tr><td>固定 C0</td><td>14.09%</td><td>5.31%</td><td>8.27%</td></tr><tr><td>重训神经网络（3 种子平均）</td><td>1.41%</td><td>0.60%</td><td>0.52%</td></tr><tr><td>旧权重</td><td>1.57%</td><td>0.60%</td><td>0.52%</td></tr></tbody></table>
+<h3>三血管</h3>
+<table><thead><tr><th>方法</th><th>Th</th><th>Fg</th><th>Fn</th></tr></thead><tbody><tr><td>固定 C0</td><td>13.56%</td><td>5.22%</td><td>8.90%</td></tr><tr><td>重训神经网络（3 种子平均）</td><td>4.92%</td><td>1.85%</td><td>2.74%</td></tr><tr><td>旧权重</td><td>10.28%</td><td>3.97%</td><td>6.29%</td></tr></tbody></table>
+<h3>七血管</h3>
+<table><thead><tr><th>方法</th><th>Th</th><th>Fg</th><th>Fn</th></tr></thead><tbody><tr><td>固定 C0</td><td>14.19%</td><td>4.60%</td><td>9.65%</td></tr><tr><td>重训神经网络（3 种子平均）</td><td>4.91%</td><td>1.60%</td><td>2.78%</td></tr></tbody></table>
+<h2>只有一、二、三个测点时</h2>
+<p>只观测 Th 和 Fg，同时评价入口恢复和三种物质。下面是带噪声结果，不能仅根据 Fn 更准就宣称入口也恢复得更好。</p>
+<h3>单血管</h3>
+<table><thead><tr><th>测点数</th><th>方法</th><th>入口</th><th>Th</th><th>Fg</th><th>Fn</th></tr></thead><tbody><tr><td>1</td><td>固定 C0</td><td>35.12%</td><td>13.42%</td><td>3.85%</td><td>8.23%</td></tr><tr><td>1</td><td>重训神经网络（3 种子平均）</td><td>21.78%</td><td>6.10%</td><td>0.76%</td><td>2.38%</td></tr><tr><td>2</td><td>固定 C0</td><td>13.71%</td><td>9.93%</td><td>3.77%</td><td>6.25%</td></tr><tr><td>2</td><td>重训神经网络（3 种子平均）</td><td>4.15%</td><td>1.96%</td><td>0.62%</td><td>0.86%</td></tr><tr><td>3</td><td>固定 C0</td><td>15.08%</td><td>8.41%</td><td>3.40%</td><td>4.24%</td></tr><tr><td>3</td><td>重训神经网络（3 种子平均）</td><td>4.14%</td><td>1.87%</td><td>0.60%</td><td>0.78%</td></tr></tbody></table>
+<h3>三血管</h3>
+<table><thead><tr><th>测点数</th><th>方法</th><th>入口</th><th>Th</th><th>Fg</th><th>Fn</th></tr></thead><tbody><tr><td>1</td><td>固定 C0</td><td>30.47%</td><td>13.74%</td><td>3.89%</td><td>9.64%</td></tr><tr><td>1</td><td>重训神经网络（3 种子平均）</td><td>26.44%</td><td>7.83%</td><td>1.85%</td><td>4.73%</td></tr><tr><td>2</td><td>固定 C0</td><td>41.09%</td><td>15.42%</td><td>3.79%</td><td>10.44%</td></tr><tr><td>2</td><td>重训神经网络（3 种子平均）</td><td>25.56%</td><td>7.58%</td><td>1.62%</td><td>4.50%</td></tr><tr><td>3</td><td>固定 C0</td><td>39.37%</td><td>14.89%</td><td>3.74%</td><td>10.00%</td></tr><tr><td>3</td><td>重训神经网络（3 种子平均）</td><td>24.25%</td><td>7.24%</td><td>1.60%</td><td>4.05%</td></tr></tbody></table>
+<h3>七血管</h3>
+<table><thead><tr><th>测点数</th><th>方法</th><th>入口</th><th>Th</th><th>Fg</th><th>Fn</th></tr></thead><tbody><tr><td>1</td><td>固定 C0</td><td>30.17%</td><td>14.64%</td><td>3.84%</td><td>10.54%</td></tr><tr><td>1</td><td>重训神经网络（3 种子平均）</td><td>25.36%</td><td>7.60%</td><td>1.70%</td><td>4.72%</td></tr><tr><td>2</td><td>固定 C0</td><td>32.50%</td><td>13.91%</td><td>3.31%</td><td>9.80%</td></tr><tr><td>2</td><td>重训神经网络（3 种子平均）</td><td>24.60%</td><td>7.22%</td><td>1.52%</td><td>4.27%</td></tr><tr><td>3</td><td>固定 C0</td><td>40.43%</td><td>15.25%</td><td>3.21%</td><td>10.71%</td></tr><tr><td>3</td><td>重训神经网络（3 种子平均）</td><td>23.91%</td><td>6.94%</td><td>1.40%</td><td>4.23%</td></tr></tbody></table>
+<h2>七血管统一到了哪一步</h2>
+<p>七血管已从原始数值血流档案的边界和几何出发，独立求解七段轴对称血流及三个分叉的耦合，再生成 Th、Fg、Fn 参考数据。它沿用三血管的网络结构和训练目标，扩展连接关系，并完成三个随机种子的训练，以及和固定 C0 的预测与稀疏反演对照。这里没有使用 Sen 神经网络预测的血流来生成标签。</p>
+<h2>这份基线用于什么</h2>
+<p>这套结果固定后，可以与后续自己设计的新模型比较。新模型应使用相同训练与验证划分；后续研究不要根据已公布测试成绩反复调参后，再把同一测试集称为盲测。</p>
+<p>单血管和三血管的旧架构本来不同，本轮分别保留了它们。七血管沿用三血管的网络和训练目标。数据、划分和评分统一，不意味着把两套既有网络改成了同一个网络。</p>
+<h2>怎样理解结果的范围</h2>
+<p>这里比较的是固定的常规一维 C0。神经网络学习了截面内浓度分布对平均输运和反应的影响；这项对照不能证明图结构本身具有独有优势，也不能证明它优于所有可能校准过的数值闭合。</p>
+<p>三血管带噪声的入口恢复平均误差范围为 24.2%–26.4%。相比 C0 有改善，但入口恢复还不够准确。单血管的第二个测点靠近入口，分叉网络的新增测点位于更远的下游，因此不能把不同网络的反演差异全归因于血管数量。</p>
+<p>七血管采用七段轴对称血流加分叉耦合，没有模拟完整三维分叉几何。生化网格加密检查已完成；七血管血流网格本身尚未做完整的收敛研究。</p>
+<p>表中 C0 的入口误差不一定随测点增加而下降。多测点会同时约束更多位置，而近似模型可能无法同时匹配这些位置；正则化强度也按各方法的全部测点布局统一选择。这轮可以检查优化是否收敛，但没有单独量化上述因素各自贡献多少。</p>
+<p>本轮没有进行受控的速度测试，不能根据这次运行耗时宣称神经网络更快。</p><h2>Figures</h2><img src="forward.png" alt="Known inlet errors"><img src="inverse.png" alt="Sparse inverse errors">

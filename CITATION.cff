@@ -4,8 +4,8 @@ title: "GP52: Neural closures for one-dimensional blood flow and coagulation"
 type: software
 authors:
   - name: "GP52 contributors"
-version: 1.0.0
-date-released: 2026-10-26
+version: 1.1.0
+date-released: 2026-10-29
 url: "https://github.com/woshilry61/gp52-neural-closure"
 repository-code: "https://github.com/woshilry61/gp52-neural-closure"
 license: MIT

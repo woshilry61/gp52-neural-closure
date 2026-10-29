@@ -1,0 +1,410 @@
+{
+  "primary_window_s": [
+    0,
+    0.82
+  ],
+  "metrics": "Volume/time weighted relative L2 percent, averaged over 16 held-out inlet curves; neural table averages all three seeds",
+  "comparison": [
+    {
+      "method": "Ordinary 1D, matched grid",
+      "Th": 10.782989859363473,
+      "Fg": 2.725500902855536,
+      "Fn": 6.806046178516288
+    },
+    {
+      "method": "Ordinary 1D, refined",
+      "Th": 14.082776822068405,
+      "Fg": 3.2402373576912313,
+      "Fn": 8.505108425928306
+    },
+    {
+      "method": "Physical single-memory closure",
+      "Th": 9.035687236041726,
+      "Fg": 2.208366020105001,
+      "Fn": 6.492408811216564
+    },
+    {
+      "method": "Quasi-steady Taylor dispersion",
+      "Th": 7.244071240392638,
+      "Fg": 1.6611585361726307,
+      "Fn": 5.801621815558335
+    },
+    {
+      "method": "Neural transport only",
+      "Th": 3.3286159632750447,
+      "Fg": 1.2106545674683193,
+      "Fn": 2.315820721362508
+    },
+    {
+      "method": "Neural reaction only",
+      "Th": 10.782989859363473,
+      "Fg": 2.7029783028736922,
+      "Fn": 6.7078021763292455
+    },
+    {
+      "method": "Neural transport + reaction",
+      "Th": 3.3286159632750447,
+      "Fg": 1.2012495451909118,
+      "Fn": 2.279937791191539
+    }
+  ],
+  "paired_statistics": {
+    "improvement_percentage_points": [
+      7.454373896088428,
+      1.5242513576646235,
+      4.526108387324749
+    ],
+    "paired_bootstrap_95_percent_interval": [
+      [
+        6.008645058134007,
+        1.1739439786814343,
+        3.842188918630961
+      ],
+      [
+        9.210701673540644,
+        1.9342575227001526,
+        5.326935527134732
+      ]
+    ],
+    "wins_over_ordinary": [
+      16,
+      16,
+      16
+    ],
+    "cases": 16,
+    "unit": "Held-out inlet waveform; training seeds averaged within each case"
+  },
+  "per_vessel_seed42": {
+    "1": {
+      "ordinary_1d": [
+        9.87781863062486,
+        2.6031233195290806,
+        6.171782501574177
+      ],
+      "neural_combined": [
+        2.0661741717826017,
+        0.4393291844767679,
+        1.8002212764418484
+      ]
+    },
+    "2": {
+      "ordinary_1d": [
+        17.17525700744308,
+        3.4042976812583747,
+        9.634950969304212
+      ],
+      "neural_combined": [
+        10.069117135349485,
+        2.5899673093028945,
+        6.018088916373567
+      ]
+    },
+    "3": {
+      "ordinary_1d": [
+        21.381973225260705,
+        1.6552731804487015,
+        21.78475661178023
+      ],
+      "neural_combined": [
+        3.1764283339791075,
+        0.3433497758488531,
+        1.7422133537199478
+      ]
+    }
+  },
+  "gpu_training": [
+    {
+      "seed": 42,
+      "gpu_mean": 97.87234042553192,
+      "gpu_max": 100.0,
+      "seconds": 93.77123423002195
+    },
+    {
+      "seed": 43,
+      "gpu_mean": 97.87234042553192,
+      "gpu_max": 100.0,
+      "seconds": 93.7548115120735
+    },
+    {
+      "seed": 44,
+      "gpu_mean": 97.87234042553192,
+      "gpu_max": 100.0,
+      "seconds": 93.74811794492416
+    }
+  ],
+  "sen": {
+    "epochs": 100000,
+    "seeds": 32,
+    "selected": 28,
+    "selection": "Minimum training objective; no reference fields used for selection",
+    "seconds": 179.0614424290834,
+    "device": "NVIDIA GeForce RTX 5090",
+    "losses": [
+      4.7266577680386916e-09,
+      6.164418521991075e-09,
+      3.8726623151261465e-09,
+      3.942572283977842e-09,
+      5.172848572843795e-09,
+      8.40765604462809e-09,
+      5.62997898147139e-09,
+      5.909257696014332e-09,
+      5.856537494018884e-09,
+      3.463303587398721e-09,
+      1.2465701225719609e-08,
+      8.971158637015258e-09,
+      1.0972416206133717e-08,
+      4.739535560896928e-09,
+      4.607632269151661e-09,
+      4.580812869544541e-09,
+      5.409198109506395e-09,
+      4.478069288917084e-09,
+      3.978800520143853e-09,
+      4.86073528103454e-09,
+      5.162436614253431e-09,
+      5.670557984106613e-09,
+      6.9926395339676054e-09,
+      6.408024270612872e-09,
+      3.3200981068467567e-09,
+      6.346003945166049e-09,
+      3.4993471030375902e-09,
+      6.890662006455295e-09,
+      3.1519131099821835e-09,
+      3.6647187033744938e-09,
+      5.879748492110391e-09,
+      4.902583754551515e-09
+    ],
+    "metrics": [
+      {
+        "vessel": 1,
+        "position_m": 0.0,
+        "point_id": 1,
+        "variable": "velocity",
+        "observed_during_training": true,
+        "relative_l2": 0.00059973865147276,
+        "r2": 0.9999995156624552
+      },
+      {
+        "vessel": 1,
+        "position_m": 0.0,
+        "point_id": 1,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.002684187030518749,
+        "r2": 0.9943296688922147
+      },
+      {
+        "vessel": 1,
+        "position_m": 0.03,
+        "point_id": 2,
+        "variable": "velocity",
+        "observed_during_training": false,
+        "relative_l2": 0.025075177228396545,
+        "r2": 0.9991240491087012
+      },
+      {
+        "vessel": 1,
+        "position_m": 0.03,
+        "point_id": 2,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.0025786499514133684,
+        "r2": 0.9950643475975954
+      },
+      {
+        "vessel": 1,
+        "position_m": 0.04,
+        "point_id": 3,
+        "variable": "velocity",
+        "observed_during_training": false,
+        "relative_l2": 0.02745848113140529,
+        "r2": 0.9989359409735062
+      },
+      {
+        "vessel": 1,
+        "position_m": 0.04,
+        "point_id": 3,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.002567681153317769,
+        "r2": 0.9951970552320264
+      },
+      {
+        "vessel": 1,
+        "position_m": 0.06,
+        "point_id": 4,
+        "variable": "velocity",
+        "observed_during_training": false,
+        "relative_l2": 0.024054625882215255,
+        "r2": 0.9991595461620971
+      },
+      {
+        "vessel": 1,
+        "position_m": 0.06,
+        "point_id": 4,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.0026051621500298786,
+        "r2": 0.995231739306571
+      },
+      {
+        "vessel": 2,
+        "position_m": 0.0,
+        "point_id": 1,
+        "variable": "velocity",
+        "observed_during_training": false,
+        "relative_l2": 0.013295912970523913,
+        "r2": 0.9997234601118945
+      },
+      {
+        "vessel": 2,
+        "position_m": 0.0,
+        "point_id": 1,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.0026028677171950287,
+        "r2": 0.9952257749151341
+      },
+      {
+        "vessel": 2,
+        "position_m": 0.01,
+        "point_id": 2,
+        "variable": "velocity",
+        "observed_during_training": false,
+        "relative_l2": 0.00751418303022755,
+        "r2": 0.9999101500085121
+      },
+      {
+        "vessel": 2,
+        "position_m": 0.01,
+        "point_id": 2,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.002625358581347573,
+        "r2": 0.995226167775018
+      },
+      {
+        "vessel": 2,
+        "position_m": 0.02,
+        "point_id": 3,
+        "variable": "velocity",
+        "observed_during_training": true,
+        "relative_l2": 0.00047000552027591134,
+        "r2": 0.9999996419759495
+      },
+      {
+        "vessel": 2,
+        "position_m": 0.02,
+        "point_id": 3,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.00264310766045997,
+        "r2": 0.995241958728648
+      },
+      {
+        "vessel": 3,
+        "position_m": 0.0,
+        "point_id": 1,
+        "variable": "velocity",
+        "observed_during_training": false,
+        "relative_l2": 0.07370238020669505,
+        "r2": 0.9939621522346832
+      },
+      {
+        "vessel": 3,
+        "position_m": 0.0,
+        "point_id": 1,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.002483007322452231,
+        "r2": 0.9956545468762646
+      },
+      {
+        "vessel": 3,
+        "position_m": 0.017,
+        "point_id": 2,
+        "variable": "velocity",
+        "observed_during_training": false,
+        "relative_l2": 0.05330723103734584,
+        "r2": 0.9968113145754777
+      },
+      {
+        "vessel": 3,
+        "position_m": 0.017,
+        "point_id": 2,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.0028091186941722295,
+        "r2": 0.9946105909783188
+      },
+      {
+        "vessel": 3,
+        "position_m": 0.034,
+        "point_id": 3,
+        "variable": "velocity",
+        "observed_during_training": true,
+        "relative_l2": 0.00033806500356138336,
+        "r2": 0.9999998702985219
+      },
+      {
+        "vessel": 3,
+        "position_m": 0.034,
+        "point_id": 3,
+        "variable": "area",
+        "observed_during_training": false,
+        "relative_l2": 0.003070067414943159,
+        "r2": 0.9937551753530228
+      }
+    ],
+    "junction_flow_relative_l2": 0.0004021283866889511,
+    "parity": {
+      "output_max_abs": 2.7755575615628914e-16,
+      "loss_abs": 1.1102230246251565e-16,
+      "gradient_max_abs": 1.3877787807814457e-16
+    },
+    "gpu_utilization_mean": 99.44444444444444,
+    "optimizer_updates_per_seed": 100004
+  },
+  "reference_checks": {
+    "0": {
+      "relative_l2": [
+        0.00541382530991945,
+        0.002516428598211913,
+        0.002735433700858711
+      ]
+    },
+    "32": {
+      "relative_l2": [
+        0.0040708740979712894,
+        0.0014577680996286381,
+        0.0019360518233551124
+      ],
+      "ordinary_1d": [
+        0.09212882379022526,
+        0.019022794657372135,
+        0.05804715619873324
+      ],
+      "neural_combined": [
+        0.027134049109383305,
+        0.007275636001725585,
+        0.022340122842303033
+      ]
+    }
+  },
+  "physical_moments": {
+    "42": {
+      "source_mean_product_relative_l2": 0.006199471221901531,
+      "source_neural_relative_l2": 0.0031249425378071924,
+      "teacher_forced_flux_relative_l2": 0.2072794219244758
+    },
+    "43": {
+      "source_mean_product_relative_l2": 0.006199471221901531,
+      "source_neural_relative_l2": 0.0030428320384785967,
+      "teacher_forced_flux_relative_l2": 0.2078185522604234
+    },
+    "44": {
+      "source_mean_product_relative_l2": 0.006199471221901531,
+      "source_neural_relative_l2": 0.0029914983492991035,
+      "teacher_forced_flux_relative_l2": 0.20646359277728654
+    }
+  }
+}

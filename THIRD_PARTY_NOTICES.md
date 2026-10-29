@@ -56,3 +56,7 @@ PyTorch, Triton, NumPy, SciPy and Matplotlib are installed separately and retain
 their respective licenses. No dependency source trees or virtual environments are
 bundled. The optional CFD generator uses scikit-fem 12.0.2; it is not required for
 the released biochemical inference and evaluation commands.
+
+## Unified independent-CFD release
+
+The v1.1.0 archives distribute project-generated CFD and biochemical arrays and project-trained biochemical checkpoints for one, three and seven vessels. Their blood fields are solved independently from the pinned numerical boundary/initial snapshots. They do not contain the upstream source tree, original snapshot files or original blood-network weights. The raw workflow fetches upstream materials from their authors.

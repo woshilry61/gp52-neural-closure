@@ -1,0 +1,97 @@
+{
+  "version": "v1.1.0",
+  "experiment": "unified-cfd-baselines-v1",
+  "assets": {
+    "single": {
+      "file": "gp52-unified-single-v1.1.0.tar",
+      "bytes": 227358720,
+      "sha256": "032149b7b63fb351a368a37c45d26e384ff3ffcc17722294c548309aed8b3603",
+      "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-single-v1.1.0.tar"
+    },
+    "three": {
+      "file": "gp52-unified-three-v1.1.0.tar",
+      "bytes": 520110080,
+      "sha256": "82404f05f2c5d4a216545a1e7f5abf90e57e3f3947217191203dff60e4af2eac",
+      "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-three-v1.1.0.tar"
+    },
+    "seven": {
+      "file": "gp52-unified-seven-v1.1.0.tar",
+      "bytes": 1489827840,
+      "sha256": "f3cb3dbe578a099fa4fad653793140773db5c70ccf4a7874e9f8c350f89c7990",
+      "parts": [
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part01",
+          "bytes": 134217728,
+          "sha256": "1cf0d90b1122d7dd197ec5f7c41bb9653de8339dd872237ee7421aa739dbc814",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part01"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part02",
+          "bytes": 134217728,
+          "sha256": "f0bc2bb8dd64f493042af04ccedc5a94e00074dc2eff0e101ab023f1d3e35e5f",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part02"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part03",
+          "bytes": 134217728,
+          "sha256": "2979cd6c7465138ecd8c308c42f989bccb8e6febae21e98074f20ec113c1de98",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part03"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part04",
+          "bytes": 134217728,
+          "sha256": "98754e01c8bf0f49fde6016382dde44d0fac08f6a9d6f51b6dd9a4b63523829a",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part04"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part05",
+          "bytes": 134217728,
+          "sha256": "c6df742455f1ad43fbcb34185f64d1ed005b94913e54adf9a80b9af5784c114d",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part05"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part06",
+          "bytes": 134217728,
+          "sha256": "db12a08d1e4ef4040a3331031f133ca315c8a12b1397cd20d89e9d5e245c7492",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part06"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part07",
+          "bytes": 134217728,
+          "sha256": "ab4093bde888eec170c00f9d38fe9305d013fc59887bc0d4868c9ad4daaff300",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part07"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part08",
+          "bytes": 134217728,
+          "sha256": "c5ff75705e1e720dc75d44e3d081b38b001e09eb2b163bd29e1cfc37159dbbd6",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part08"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part09",
+          "bytes": 134217728,
+          "sha256": "66b0ed10016b68c6910fde07de4316b7694c59a2b867df7be374d2af337bd050",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part09"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part10",
+          "bytes": 134217728,
+          "sha256": "33649284ad6e80a3b065c32129ad6c06f1a8c49f39c56c9cdcb95a51d8e7d5ba",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part10"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part11",
+          "bytes": 134217728,
+          "sha256": "8308fd4c233d25b9dc8932bec13eb0be55f90a7a61a6b87f9ba0174483995cfc",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part11"
+        },
+        {
+          "file": "gp52-unified-seven-v1.1.0.tar.part12",
+          "bytes": 13432832,
+          "sha256": "165214a9a4cd88e6e85d9597a1c9d19a2eaa53f1744fc55f15c5b12a1a1c8d75",
+          "url": "https://github.com/woshilry61/gp52-neural-closure/releases/download/v1.1.0/gp52-unified-seven-v1.1.0.tar.part12"
+        }
+      ]
+    }
+  }
+}

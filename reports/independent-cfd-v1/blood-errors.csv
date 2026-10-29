@@ -1,0 +1,40 @@
+vessel,metric,comparison,relative_l2
+1,area,Sen projected vs independent CFD,0.008422106055173304
+1,area,Sen raw vs independent CFD projected,0.008422106055173304
+1,area,Main vs refined independent CFD,0.0030466964628915595
+1,q,Sen projected vs independent CFD,0.05081657320434027
+1,q,Sen raw vs independent CFD projected,0.022381627776112918
+1,q,Sen conservation projection change,0.04326033504878099
+1,q,Main vs refined independent CFD,0.005861209815077377
+1,velocity,Sen projected vs independent CFD,0.053635301576033495
+1,velocity,Sen raw vs independent CFD projected,0.022292069012003965
+1,velocity,Main vs refined independent CFD,0.005501991465390997
+1,area,Sen raw vs original numerical midpoint,0.0023625965652340104
+1,q,Sen raw vs original numerical midpoint,0.022767691650682403
+1,velocity,Sen raw vs original numerical midpoint,0.02338894427238396
+2,area,Sen projected vs independent CFD,0.008527921848653633
+2,area,Sen raw vs independent CFD projected,0.008527921848653633
+2,area,Main vs refined independent CFD,0.003029018896215817
+2,q,Sen projected vs independent CFD,0.056042636837105364
+2,q,Sen raw vs independent CFD projected,0.01605986676950959
+2,q,Sen conservation projection change,0.05384950323214326
+2,q,Main vs refined independent CFD,0.005739844157341953
+2,velocity,Sen projected vs independent CFD,0.06004759898468169
+2,velocity,Sen raw vs independent CFD projected,0.01652237940156638
+2,velocity,Main vs refined independent CFD,0.0062779630610273465
+2,area,Sen raw vs original numerical midpoint,0.0024158815793729016
+2,q,Sen raw vs original numerical midpoint,0.006795143179947775
+2,velocity,Sen raw vs original numerical midpoint,0.00679953283722583
+3,area,Sen projected vs independent CFD,0.008379556944918229
+3,area,Sen raw vs independent CFD projected,0.008379556944918229
+3,area,Main vs refined independent CFD,0.003037683511815583
+3,q,Sen projected vs independent CFD,0.23241941010756698
+3,q,Sen raw vs independent CFD projected,0.044015738270310294
+3,q,Sen conservation projection change,0.22818521604554218
+3,q,Main vs refined independent CFD,0.008784797246269066
+3,velocity,Sen projected vs independent CFD,0.2480102191644509
+3,velocity,Sen raw vs independent CFD projected,0.045430571685012085
+3,velocity,Main vs refined independent CFD,0.00861457974524821
+3,area,Sen raw vs original numerical midpoint,0.0026675533111488016
+3,q,Sen raw vs original numerical midpoint,0.04693189919382333
+3,velocity,Sen raw vs original numerical midpoint,0.04893604613654564

@@ -1,0 +1,54 @@
+{
+  "version": "three-vessel-unified-report-v2",
+  "baseline_id": "three-c0-fv-v1",
+  "observation_end_s": 1.23,
+  "inlet_score_interval_s": [
+    0,
+    0.82
+  ],
+  "fn_score_interval_s": [
+    0,
+    1.23
+  ],
+  "observation_species": [
+    "Th",
+    "Fg"
+  ],
+  "observations_per_species_per_site": 24,
+  "sensors_m": [
+    0.03,
+    0.01,
+    0.017
+  ],
+  "test_case_ids": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "noise_absolute_std": 0.02,
+  "noisy_realizations": 3,
+  "neural_seeds": [
+    42,
+    43,
+    44
+  ],
+  "neural_aggregation": "Average independently evaluated errors; not an ensemble",
+  "time_metric": "Equal time-sample weights on the existing uniform 0.002 s grid",
+  "spatial_metric": "Cell-volume-weighted Fn over the entire three-vessel network",
+  "training_performed": false,
+  "inference_or_inverse_optimization_performed": false,
+  "validation_retuning_performed": false
+}

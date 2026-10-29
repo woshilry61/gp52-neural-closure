@@ -1,0 +1,118 @@
+{
+  "experiment": "Independent three-tube axisymmetric CFD blood, frozen biochemical transfer",
+  "source_commit": "2acbe323297d66ce3f4fb294006f1a87bf691ab1",
+  "reference": "ALE axisymmetric Navier-Stokes in each tube, monolithic common-normal-traction and net-flux junction; resolved chemical transport with perfect mixing at junction",
+  "no_training": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "baseline": "Fixed C0 from three-vessel-method-lock-v1; unchanged equations, mesh, D, rate, boundary conventions",
+  "primary_blood": "Independent CFD, identical A/Q for C0 and all frozen networks",
+  "secondary_blood": "Original Sen projected A/Q, identical for C0 and all frozen networks; evaluate against exactly the same independent chemical targets and observations",
+  "test_cases": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "validation_cases": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "reference_inlets": "Same fixed 48-amplitude archive; computing the first 24 again does not constitute training",
+  "observations": {
+    "species": [
+      "Th",
+      "Fg"
+    ],
+    "sites_m": [
+      0.03,
+      0.01,
+      0.017
+    ],
+    "layouts": [
+      [
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        2
+      ]
+    ],
+    "time_count": 24,
+    "time_window": [
+      0.002,
+      1.23
+    ],
+    "noise_std": 0.02,
+    "replicates": [
+      "clean",
+      "noise1",
+      "noise2",
+      "noise3"
+    ],
+    "seed": 2026102802
+  },
+  "inlet_metric_window": [
+    0,
+    0.82
+  ],
+  "concentration_metric_window": [
+    0,
+    1.23
+  ],
+  "metric": "Per-case space-time volume-weighted relative L2, using independent CFD reference volumes for both methods and both blood inputs; average cases, then seeds",
+  "inverse": {
+    "regularization": {
+      "ordinary_1d": 0.0001,
+      "neural_42": 0.0,
+      "neural_43": 0.0,
+      "neural_44": 0.0
+    },
+    "selection": "Locked previous validation choices; no new tuning on independent CFD test data",
+    "bounds": [
+      0,
+      1.2
+    ],
+    "starts": [
+      "bounded linear Th initializer",
+      "constant 0.3",
+      "constant 0.9"
+    ],
+    "max_iterations": 100,
+    "projected_gradient_tolerance": 1e-08,
+    "finite_difference": 0.002
+  },
+  "isolation": "Both blood arms use the same checkpoints, observations, noise, regularization, starting rule and stopping criteria. Paired change is total impact of replacing blood fields, not an additive error identity.",
+  "interpretation": "Sen-vs-independent-CFD blood discrepancy includes original 1D-vs-axisymmetric physics and neural reconstruction error; a separate Sen-vs-raw-1D table isolates reconstruction against its source.",
+  "limitations": [
+    "No bifurcation angle or junction recirculation",
+    "Radial massless elastic wall",
+    "Synthetic biochemical kinetics and inlet ensemble, not measured coagulation"
+  ]
+}

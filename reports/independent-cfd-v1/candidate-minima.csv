@@ -1,0 +1,17 @@
+blood,method,scenario,Th,Fg,Fn
+cfd,ordinary_1d,forward,0.0,0.28907992853236325,0.0
+cfd,ordinary_1d,inverse,0.0,0.3229821060755807,0.0
+cfd,neural_42,forward,0.0,0.35803453953385284,0.0
+cfd,neural_42,inverse,0.0,0.3519569901923461,0.0
+cfd,neural_43,forward,0.0,0.36023109857966423,0.0
+cfd,neural_43,inverse,0.0,0.35241353370221706,0.0
+cfd,neural_44,forward,0.0,0.3596491598437409,0.0
+cfd,neural_44,inverse,0.0,0.35216877446444306,0.0
+sen,ordinary_1d,forward,0.0,0.289535839787867,0.0
+sen,ordinary_1d,inverse,0.0,0.3219785712147393,0.0
+sen,neural_42,forward,0.0,0.35851117229773904,0.0
+sen,neural_42,inverse,0.0,0.35609055552465535,0.0
+sen,neural_43,forward,0.0,0.35948814690593117,0.0
+sen,neural_43,inverse,0.0,0.3560157681988525,0.0
+sen,neural_44,forward,0.0,0.3600231181733379,0.0
+sen,neural_44,inverse,0.0,0.35631762561139924,0.0

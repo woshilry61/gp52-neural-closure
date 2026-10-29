@@ -1,0 +1,15 @@
+{
+  "fits_recomputed": 768,
+  "independent_test_inlets": 16,
+  "legacy_metric_max_absolute_difference": {
+    "inlet_0_082": 0.0,
+    "fn_0_123": 6.938893903907228e-17
+  },
+  "protected_files": 67,
+  "changed_protected_files": [],
+  "training_performed": false,
+  "optimization_performed": false,
+  "max_selected_projected_gradient": 7.972945059719905e-08,
+  "selected_over_1e8": 51,
+  "selected_over_1e6": 0
+}

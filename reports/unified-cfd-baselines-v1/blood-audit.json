@@ -1,0 +1,74 @@
+{
+  "single": {
+    "minimum_cell_volume_m3": [
+      1.5169946341954885e-06
+    ],
+    "transfer": {
+      "projection_relative_l2": [
+        0.002306070909031143
+      ],
+      "continuity_max": 8.151845084375386e-18
+    },
+    "canonical_sha256": "f932a2f08631bb9ef3a080dbc84c8601d45623550a40808108a11d50b495dbfd"
+  },
+  "three": {
+    "minimum_cell_volume_m3": [
+      5.180904884307107e-07,
+      3.9881592154981834e-07,
+      1.1706051069047184e-07
+    ],
+    "transfer": {
+      "projection_relative_l2": [
+        0.000620139906074427,
+        0.0018515275890161327,
+        0.002039863194127443
+      ],
+      "continuity_max": 3.415236843329339e-18,
+      "junction_max": 1.0842021724855044e-19
+    },
+    "canonical_sha256": "8b21444cbc4b3343f2e4171e44ccd43b81800a5c424e86cf8ff1e23a9286c31d"
+  },
+  "seven": {
+    "minimum_cell_volume_m3": [
+      4.999550119600736e-07,
+      3.8474680514716706e-07,
+      1.1294580317375656e-07,
+      3.463413112318202e-07,
+      3.1398779507730337e-08,
+      8.316100228207478e-08,
+      3.69714517438454e-08
+    ],
+    "transfer": {
+      "projection_relative_l2": [
+        0.00199199990402398,
+        0.0010048500936024071,
+        0.00021789698166667788,
+        0.004345914490031863,
+        0.0005477659647912966,
+        0.0036848072389651415,
+        0.0009583040134496554
+      ],
+      "continuity_max": 3.415236843329339e-18,
+      "junction_max": 1.0842021724855044e-19
+    },
+    "canonical_sha256": "9cd993d207442158d15e7a7958a0461eeebd3c61fd7a0e54605f1fe076330928",
+    "blood_solve": {
+      "max_weak_divergence": 1.4866252504519047e-14,
+      "max_junction_flux_m3_s": 2.617083881241323e-18,
+      "max_linear_relative_residual": 7.043174603679823e-16,
+      "nx": [
+        24,
+        8,
+        14,
+        16,
+        56,
+        14,
+        38
+      ],
+      "nr": 10,
+      "dt": 0.001,
+      "duration": 1.23
+    },
+    "resolution_scope": "Conservative independent CFD at the stated mesh; the biochemical refinement check does not establish full seven-vessel blood-mesh convergence."
+  }
+}

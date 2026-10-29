@@ -1,0 +1,20 @@
+{
+  "release": "v1.1.0",
+  "experiment_source_commit": "3bf641d",
+  "legacy_base_commit": "84d54c5e85e763fa0d3ca91495b71932bedf977a",
+  "checks": {
+    "unit_tests": 13,
+    "all_python_sources_parse": true,
+    "scientific_figures_and_tables_unchanged": 59
+  },
+  "artifacts": {
+    "README.md": "0ec34d5114a88adfd2d875b18e2a7ac787c9e8c203e21e749b9ec9434e982a1e",
+    "docs/CURRENT_MODEL.md": "e2b8195ed8111748a83d42519d17b74c71aad847dc940d5f392cf3d929073665",
+    "docs/UNIFIED_REPRODUCTION.md": "29341c252e6249a96834f28ea88764764e7c0915511fffa4afe22efb0efe281d",
+    "docs/presentation/GP52_Group_Update.pptx": "2c43c800c5f7692a2f12f292de219bc5f8ab83c8fff0d26e68c8885b0c8d7ac5",
+    "docs/presentation/GP52_Group_Update.pdf": "13012712a7c778295efa26a79655f6ee1bd7b3795751b742e59912a9a5919594",
+    "reports/unified-cfd-baselines-v1/summary.csv": "f64f35e50a85bc7692f460eb2ef5a4ab46dc4f303a5b15ecf7cbf30bc113ef2f",
+    "reports/unified-cfd-baselines-v1/per-case-errors.csv": "d9406699e50db0e2486c245bf70922483d4c1a8e8e5cb935f5e8ed21cbacc345",
+    "data/unified-manifest.json": "621576fd73a9aa512305972ddeabea7df064f39638af0ad6cfc58f6f58ab4d61"
+  }
+}

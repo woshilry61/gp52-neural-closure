@@ -1,0 +1,13 @@
+{
+  "old_inlet_and_fn_max_abs_difference": 1.1102230246251565e-16,
+  "known_inlet_replay_max_abs": {
+    "C0": 6.461498003318411e-14,
+    "neural_42": 1.1831564505904169e-08,
+    "neural_43": 1.1500600916036774e-08,
+    "neural_44": 1.1726715931636988e-08
+  },
+  "selected_inverse_fits": 768,
+  "neural_training": false,
+  "inverse_refitting": false,
+  "regularization_retuning": false
+}

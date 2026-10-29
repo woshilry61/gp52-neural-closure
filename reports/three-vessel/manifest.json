@@ -1,0 +1,21 @@
+{
+  "reports/three-vessel/verification.json": "b8ff854958c2bed5e2e0c58693cc106061dd2ff44098bdef4bb3b4886fdb6a89",
+  "reports/three-vessel/REPORT.md": "c911f7cf937fb9b4d016e9e565ef89bcbee950f36187c0768f44dd3fb1a367d6",
+  "reports/three-vessel/summary.json": "6fba800ebb080c86eaf7af0445d6e2911e5650808c92b83780103d49c6e08a42",
+  "reports/three-vessel/fn-waveforms.png": "b27cc42e3f610c7c64e8a7d43b63c45b3638b7d15c58b6a77170da3b59b0fdb4",
+  "reports/three-vessel/sen-blood-waveforms.png": "b46edab8f90d038ef504f21d5ad1391054887ee322592d461060143a1dd56b2b",
+  "reports/three-vessel/comparison.csv": "f2ab6ef5b88bfc940d225dd2a2a6237b296a9cc5a314a18a07c980a449edc50a",
+  "reports/three-vessel/prediction-errors.png": "235074ee3a3f1042cd8a940b5f6adb20a4a62c89922f2c50bc412f3949ac5cfc",
+  "src/gp52/three/evaluate.py": "8297481ac5313e84dfa57dc30706ee3ee81023d06c4b11f91f618917b4f72d4e",
+  "src/gp52/three/sen.py": "a517bc47c21ddc1954f70ee64942de57bc96f1cb62040ab6197ed3b4fc499d5a",
+  "src/gp52/three/report.py": "18a0ba743853324be5f5661592595e2d0547851c3064b8bb429a6082afbc2724",
+  "src/gp52/three/closure.py": "d0a60e247e9d623fa9d0cf794c1c570b599349dafc6d4bfef30c24bace60ecaa",
+  "src/gp52/three/__init__.py": "133bc34964d142186542f595c0f92799a67a54f4d7b5b808efcd3998574cbbfc",
+  "src/gp52/three/checks.py": "8038e4eca069259be037a8218278e688ee4658172325fa57f10b39e77d288289",
+  "src/gp52/three/reference.py": "53cc2da1e869ff645a7d5f5f20d036be63e075a3abdd882a5f9052d18b6d55cf",
+  "scripts/run_three_vessel.py": "598c9f9a465d2ca98f214aebaecc6fec0af8f0e57a385dc558a2d1db7a1a7902",
+  "scripts/export_sen_three.py": "dfeb18fd011322d5f7377ce40471aa8a817f82717a0ee828a56634d45dae8524",
+  "scripts/report_sen_three.py": "311c215c9b7439cfdae06a1c0f92677e631434efe6d90e82302ec63c88952fb8",
+  "docs/THREE_VESSEL_README.md": "ebd83c2ac0833173f991f93af7b8ebc8343ebd36414cfa62c7df6fe253e5050d",
+  "docs/THREE_VESSEL_PROTOCOL.md": "a242b5a502d865514eb47d50c0ae36416b1cc17cbee6322bbb5dca59f66ca262"
+}

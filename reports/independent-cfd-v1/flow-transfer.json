@@ -1,0 +1,30 @@
+{
+  "main_transfer": {
+    "projection_relative_l2_by_vessel": [
+      0.0020690527818031743,
+      0.008560326394920523,
+      0.004335342497162422
+    ],
+    "continuity_max_m3_s": 3.3915199208062186e-18,
+    "junction_max_m3_s": 8.131516293641283e-20
+  },
+  "refined_transfer": {
+    "projection_relative_l2_by_vessel": [
+      0.0006201399060744266,
+      0.001851527589016133,
+      0.0020398631941274436
+    ],
+    "continuity_max_m3_s": 3.415236843329339e-18,
+    "junction_max_m3_s": 1.2197274440461925e-19
+  },
+  "unprojected_finite_element_checks": {
+    "blood-main": {
+      "raw_global_accumulated_volume_defect": 9.587392025913662e-05,
+      "raw_junction_max_m3_s_after_initial": 3.4076592065006414e-08
+    },
+    "blood-refined": {
+      "raw_global_accumulated_volume_defect": 4.938637207996417e-05,
+      "raw_junction_max_m3_s_after_initial": 4.134224938343083e-08
+    }
+  }
+}

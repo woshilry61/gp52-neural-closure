@@ -1,0 +1,71 @@
+{
+  "lam": 0.0,
+  "scores": {
+    "0.0": 0.27082980281423963,
+    "0.0001": 0.2823450070832677,
+    "0.01": 0.4319707837822391
+  },
+  "records": [
+    {
+      "method": "ordinary_1d",
+      "lam": 0.0,
+      "mean_inlet_error": 0.31333229274116353
+    },
+    {
+      "method": "ordinary_1d",
+      "lam": 0.0001,
+      "mean_inlet_error": 0.2977246100727657
+    },
+    {
+      "method": "ordinary_1d",
+      "lam": 0.01,
+      "mean_inlet_error": 0.40664788130569374
+    },
+    {
+      "method": "neural_42",
+      "lam": 0.0,
+      "mean_inlet_error": 0.22571482737413748
+    },
+    {
+      "method": "neural_42",
+      "lam": 0.0001,
+      "mean_inlet_error": 0.2682510349209552
+    },
+    {
+      "method": "neural_42",
+      "lam": 0.01,
+      "mean_inlet_error": 0.4532886380551145
+    },
+    {
+      "method": "neural_43",
+      "lam": 0.0,
+      "mean_inlet_error": 0.2285866137656579
+    },
+    {
+      "method": "neural_43",
+      "lam": 0.0001,
+      "mean_inlet_error": 0.26574645150091303
+    },
+    {
+      "method": "neural_43",
+      "lam": 0.01,
+      "mean_inlet_error": 0.4586439367608479
+    },
+    {
+      "method": "neural_44",
+      "lam": 0.0,
+      "mean_inlet_error": 0.230680497522152
+    },
+    {
+      "method": "neural_44",
+      "lam": 0.0001,
+      "mean_inlet_error": 0.2668987258594411
+    },
+    {
+      "method": "neural_44",
+      "lam": 0.01,
+      "mean_inlet_error": 0.45994848396039073
+    }
+  ],
+  "selection": "Validation only, all layouts, clean plus three noise replicates, equal method-family weighting"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": 80,
+  "case_selection": "First held-out ID; no performance ranking",
+  "neural_trace_seed": 42,
+  "inverse_trace_noise_rep": 1,
+  "bootstrap_resamples": 3000,
+  "bootstrap_seed": 52703103,
+  "independent_test_cases": 32,
+  "png_dpi": 600,
+  "figure_width_mm": 180,
+  "input_sha256": {
+    "runs/unified-cfd-baselines-v1/report-curves.npz": "f9fdcd5b8ad5aba8e515c5c2e2dcdf003f567e64b22695dfea60ef8aacc53084",
+    "reports/unified-cfd-baselines-v1/per-case-errors.csv": "d9406699e50db0e2486c245bf70922483d4c1a8e8e5cb935f5e8ed21cbacc345",
+    "reports/unified-cfd-baselines-v1/summary.csv": "f64f35e50a85bc7692f460eb2ef5a4ab46dc4f303a5b15ecf7cbf30bc113ef2f",
+    "reports/unified-cfd-baselines-v1/paired.csv": "1e3a41b4271336cbb2d167a1a368c0b9806f703caba587ec574c65941f4d4bad",
+    "reports/unified-cfd-baselines-v1/manifest.json": "f46d5ca09127c9c0073ac07d37e6d4b3d9b9118b76b84221850426dfe9e7706c",
+    "src/gp52/unified/paper_figures.py": "e21d15d18e0dfdd6b259f9255f9188c3941c071d76bb1934088d62ad5f87b916",
+    "runs/unified-cfd-baselines-v1/single/observations.npz": "04ecfeab60e1d94be3faec8ae6dd1bcc7c6a98ab2a0d6f4dd2b1bf5fe79d67b5",
+    "runs/unified-cfd-baselines-v1/three/observations.npz": "5495bba697750bba7588850360d17818b358666fc98cfdc2e9f9edaea8fe9234",
+    "runs/unified-cfd-baselines-v1/seven/observations.npz": "f50f65b916759a2c79dfc7cf8042956108783d19db77a1eb27a28e286c5f4501"
+  }
+}

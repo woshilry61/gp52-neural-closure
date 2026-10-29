@@ -1,0 +1,54 @@
+{
+  "ordinary_1d": {
+    "known_max_absolute_by_species": [
+      1.7039093469506383e-07,
+      2.8346750299279577e-06,
+      1.475566777031645e-05
+    ],
+    "random_max_absolute_by_species": [
+      1.6226916677020142e-07,
+      2.7766703049048047e-06,
+      1.0994428386812416e-05
+    ],
+    "finite_difference_relative_change": 0.0005302687165533289
+  },
+  "neural_42": {
+    "known_max_absolute_by_species": [
+      1.56148870278372e-07,
+      2.796602363464018e-06,
+      1.2222137492745588e-05
+    ],
+    "random_max_absolute_by_species": [
+      1.4997251129855727e-07,
+      2.4534388065600155e-06,
+      8.236489434043648e-06
+    ],
+    "finite_difference_relative_change": 0.0005719925298655021
+  },
+  "neural_43": {
+    "known_max_absolute_by_species": [
+      1.6884238585035405e-07,
+      2.774966702423498e-06,
+      9.160080445935748e-06
+    ],
+    "random_max_absolute_by_species": [
+      1.6979597616817443e-07,
+      2.5810508836876522e-06,
+      9.520527505690879e-06
+    ],
+    "finite_difference_relative_change": 0.000531986549079839
+  },
+  "neural_44": {
+    "known_max_absolute_by_species": [
+      1.7727298085024046e-07,
+      2.883220506011419e-06,
+      1.2023037859520969e-05
+    ],
+    "random_max_absolute_by_species": [
+      1.5622188209718502e-07,
+      2.2601587090775865e-06,
+      7.5610695411398865e-06
+    ],
+    "finite_difference_relative_change": 0.0005613507193757437
+  }
+}

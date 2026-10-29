@@ -1,0 +1,25 @@
+{
+  "visual_review": "All 11 PDF-rendered previews inspected; title/panel overlap corrected and rechecked.",
+  "figures": 11,
+  "pdfs_including_collection": 12,
+  "svg_files": 11,
+  "png_dpi": 600,
+  "fonts": "Embedded CID TrueType; no Type 3 fonts",
+  "plotted_means": "Match locked evaluation summary to 1e-10 percentage points",
+  "source_sha256": "e21d15d18e0dfdd6b259f9255f9188c3941c071d76bb1934088d62ad5f87b916",
+  "pdf_sha256": {
+    "figS5_seven_forward.pdf": "faaf9a3a1ea9fb54fac09346ed2cc788350ddcaad4c5e28f2f7fc591adc604b9",
+    "figS4_three_inverse.pdf": "7891e35a29aebdde732c0bc50ff71e515d5a02794cc73dbd47d1592a2f912294",
+    "figS2_single_inverse.pdf": "1e5fecc3ae1790a703f6a30b75d04e328debc9498127f11c45496a7abc41d370",
+    "fig04_forward_errors.pdf": "598dc8146fed6a76cf05735506dffcd373e88be0d9ae18b3b49c0d55c21f0fd6",
+    "figS6_seven_inverse.pdf": "7590c962e7487025778ca66f8448cf13e31500eb816dfd8b4ce3d2934df06c5f",
+    "fig02_inlet_recovery.pdf": "b8f6df6a6068019d5b02bf70fbadbc107e34f1f903bd1154289f2a36646b642f",
+    "fig01_forward_time.pdf": "8689b0a5027db9c65a955c83fc3a7dd48da77c3e14ad01002f5fb6fa9770e5eb",
+    "fig05_inverse_errors.pdf": "c41776d79b61b9bf74f986413cdb5d560955e291a4d5e9e5c993f3fca59b5e05",
+    "figS3_three_forward.pdf": "dd1f509d81e49af69e38671fffe4b8d4a99513d944516025b4441227b67c0c7e",
+    "figS1_single_forward.pdf": "0362303722eede1aa41575ff56af9c0a381fbfa530aae0247e6e71fb11321fd6",
+    "fig03_inverse_time.pdf": "8069e2701c7787598fc58daa3894e9aacd584ef9eff95f0f3a0e8b1784ffeb19",
+    "all-figures.pdf": "2aa5d9ce8a34f400dac662a847509fd2b8476b698297bcac713b7dbfa0eddfd0"
+  },
+  "svg_whitespace": "Normalized; all path token sequences preserved"
+}

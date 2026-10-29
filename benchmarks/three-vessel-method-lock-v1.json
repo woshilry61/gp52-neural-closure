@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-27",
+  "purpose": "Freeze method identities and existing forward definitions; do not retrain neural models or overwrite previous results.",
+  "current_three_vessel": {
+    "experiment": "three-vessel-fixed-flow",
+    "commit": "e11a4b8d2395312f79efe5694c21c810cda85dcb",
+    "baseline_id": "three-c0-fv-v1",
+    "display_name": "Ordinary 1D finite volume, C0",
+    "baseline": "Conservative finite-volume advection and molecular diffusion; mean-product catalytic reaction; no flux-memory or learned correction",
+    "diffusivity_m2_per_s": 0.0002,
+    "reaction_rate_coefficient": 2.0,
+    "reaction": "Th catalytic; Fg consumed and immobile Fn produced by the same reaction amount",
+    "axial_cells": [
+      30,
+      10,
+      17
+    ],
+    "length_m": [
+      0.06,
+      0.02,
+      0.034
+    ],
+    "dt_s": 0.002,
+    "duration_s": 1.23,
+    "junction": "Perfectly mixed zero-volume junction with conservative branch fluxes",
+    "blood": "Same selected Sen prediction and discrete conservation projection for all candidates",
+    "forward_entry": "gp52.three.evaluate.solve(amp=None, tau=None, factor=None, extra_diffusion=None)",
+    "accelerated_entry": "gp52.three.inverse_gpu.GPUModel(seed=None, precision=\"double\")",
+    "neural_ids": [
+      "three-gg-42",
+      "three-gg-43",
+      "three-gg-44"
+    ],
+    "neural_policy": "Keep all three frozen checkpoints; no seed selection on test results",
+    "sha256": {
+      "src/gp52/three/reference.py": "53cc2da1e869ff645a7d5f5f20d036be63e075a3abdd882a5f9052d18b6d55cf",
+      "src/gp52/three/evaluate.py": "8297481ac5313e84dfa57dc30706ee3ee81023d06c4b11f91f618917b4f72d4e",
+      "src/gp52/three/inverse_gpu.py": "2c125e62a188b8134a208f63dbbf4d56d24d8264409b2aa6d93ac227553bd4bd",
+      "src/gp52/three/inverse.py": "42819943e03b3091a513bed45c8b371ae2e7500562fa9a067467b013f9b43e8e",
+      "runs/sen-three-gpu-v2/fields.npz": "92f574b8664bd923814919b7ca1dd60e4d6a0084baec4f7cff4afb4e44185c88",
+      "runs/reference-final/training-grid.npz": "2d5cdcd1a65e3ca9fc10ce94bc83a57578c38f6c1ed3d1b61212d98e4d8a2af5",
+      "runs/closure-final-42/model.pt": "de5f05ced1b1af1472b7875c26601cdbd651768b240bbf609c9fdcc78b62620f",
+      "runs/closure-final-43/model.pt": "5065838c67d713f040929c02260cc99882236ddb47c336b24a35967ab274c324",
+      "runs/closure-final-44/model.pt": "aa4abd96639e79152f8ba3573074d9da7510c00203db88159a7bad131aa96165"
+    }
+  },
+  "published_single_vessel": {
+    "experiment": "single-vessel-published",
+    "commit": "84d54c5e85e763fa0d3ca91495b71932bedf977a",
+    "baseline_id": "single-c1-published",
+    "display_name": "Calibrated numerical closure, C1",
+    "baseline": "Published conservative finite-volume solver with fixed five-parameter transport/reaction correction; no neural network",
+    "theta": [
+      0.7873817261695291,
+      -0.09295961516979014,
+      -0.05423938854938835,
+      -1.2230866117405637,
+      -0.07015216488900271
+    ],
+    "neural_id": "single-gg-published",
+    "sha256": {
+      "src/gp52/baseline.py": "4728844c75c7a2811ba3f62086cc5b3e948288bcccd64e403ba30afee864fe16",
+      "src/gp52/transport.py": "987f34e9b1f5d656b4cd1c34c29b8d1dfb19715655799abdb09513e3f2cba583",
+      "src/gp52/assets/transport-graph.pt": "88eb46dcf8457b576596050bd4f45696726659e39cced90c257e3f2ce5a10592",
+      "src/gp52/assets/reaction-GG.pt": "dfd719c82906429ff7b99009d5d8fe45ce83bb79c7d756ada1d4d9b308ce432a",
+      "src/gp52/assets/flow.npz": "1461c463c32695ed3c0c01349d9db7b8abc051d2ef109b9a8636cad8b3a8a1ef",
+      "src/gp52/assets/inverse-settings.json": "7dd4a92c3d96f6a73a738eba3db28eae76f6b31e31c8aed3cb283d016d66a641"
+    },
+    "policy": "Archive/reproduce the published comparison separately. Do not relabel C1 as C0 or transplant its coefficients to the three-vessel geometry."
+  },
+  "evaluation_policy": {
+    "frozen_historical_protocol": "The completed three-vessel inverse tables are v1. Shared-regularization and model-specific-regularization results remain separate.",
+    "methods_unchanged_when": "Changing observation windows, sensor layouts, objective scaling or inverse regularization requires reevaluation, not biochemical neural retraining.",
+    "next_inverse_protocol": "After the fairness audit, any revised inverse weighting or regularization-selection rule must receive its own protocol/run identifier, use validation only and apply equally to every candidate. Preserve v1 results.",
+    "test_policy": "Existing test cases have already been inspected; reruns are not a new blind test.",
+    "stronger_baseline": "A calibrated non-neural three-vessel closure may be added only under a separate named method and version. It must not silently replace three-c0-fv-v1.",
+    "retraining_triggers": [
+      "Changed neural architecture or closure equations",
+      "Changed training distribution, blood or geometry intended to be learned",
+      "A confirmed model implementation defect that invalidates the existing learned weights"
+    ]
+  }
+}

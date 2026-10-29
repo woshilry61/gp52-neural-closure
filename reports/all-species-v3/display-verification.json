@@ -1,0 +1,12 @@
+{
+  "static_figures": "Inspected three-species, three-location layout and legends",
+  "interactive_viewer": "Verified loading and switching test case, sensor count, and noise realization in a browser",
+  "single_ui_case": 2026102628,
+  "single_ui_sites": 3,
+  "single_ui_noise_rep": 3,
+  "three_ui_case": 47,
+  "three_ui_sites": 2,
+  "three_ui_noise_rep": 0,
+  "full_html_report": "Verified rendered tables and image references",
+  "all_original_files_unchanged": true
+}

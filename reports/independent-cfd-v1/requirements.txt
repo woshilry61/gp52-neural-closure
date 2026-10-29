@@ -1,0 +1,4 @@
+scikit-fem==12.0.2
+# Optional benchmark only; retain the project NumPy pin.
+numpy==1.26.4
+cupy-cuda12x==13.6.0

@@ -1,0 +1,111 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Full Th/Fg/Fn report</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;background:#f3f6f8;color:#24323e;margin:0}main{max-width:1250px;margin:24px auto;padding:30px;background:white}h1{font-size:28px}h2{margin-top:38px}a{color:#087eaa}img{width:100%;height:auto}figure{margin:20px 0}.table{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:right;border-bottom:1px solid #dce4ea;padding:9px;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{background:#eff5f8}pre{background:#eff5f8;padding:16px;overflow:auto}.nav{background:#e9f4fa;padding:12px 16px;border-radius:6px}li{margin:6px 0}@media(max-width:700px){main{padding:16px;margin:0}}</style><main><p class="nav"><a href="curves.html">Explore every concentration curve</a> · <a href="REPORT.md">Markdown source</a> · <a href="inverse-summary.csv">Summary data</a></p><h1>Three-vessel Th, Fg and Fn: fixed C0 comparison</h1>
+<p>This report completes the concentration display for the existing frozen models. It adds full-window Th and Fg scores to the previously reported Fn and inlet scores. Existing inverse fits, regularization choices, weights, C0 equations and historical reports are unchanged.</p>
+<p><strong>Open <a href="curves.html">the complete concentration viewer</a></strong> to choose any test inlet, known-inlet prediction or one/two/three-site inversion, and clean or any of the three noisy realizations. All three species and three spatial locations are shown together.</p>
+<h2>Reading the results</h2>
+<ul>
+<li>Known-inlet forward prediction: supply the true Th inlet and compare all predicted concentration fields with the resolved reference.</li>
+<li>Sparse inverse reconstruction: fit the seven Th inlet amplitudes to Th/Fg observations, then assess all reconstructed fields. Fn is never supplied as an observation.</li>
+<li>Th, Fg and Fn errors use the full 0–1.23 s interval and every cell, with shared cell-volume weights and equal time-sample weights. The inset curves show specific locations; the error tables score the whole domain.</li>
+<li>Inlet recovery retains 0–0.82 s. Observations are the same 24 times from 0.002 to 1.23 s. The final inlet amplitude is held after 0.82 s.</li>
+<li>There are 16 existing held-out inlet cases. Noisy results average three Gaussian realizations per case, with absolute standard deviation 0.02. The two candidate families receive the same arrays.</li>
+<li>Concentrations use the existing model units, not calibrated clinical concentration measurements.</li>
+</ul>
+<p>Three-vessel neural means average errors from frozen seeds 42, 43 and 44. They are not errors of an ensemble prediction. All seeds remain visible in the curve viewer and the per-method CSV tables. Sites are the parent midpoint (30 mm), then daughter 1 midpoint (10 mm), then daughter 2 midpoint (17 mm).</p>
+<p>The reference resolves axial and radial concentration variation in each tube with a prescribed blood field and a perfectly mixed junction. It is not a full three-dimensional Navier–Stokes bifurcation simulation.</p>
+<h2>Known-inlet forward prediction</h2>
+<div class="table"><table>
+<tr><th>Method</th><th>Th</th><th>Fg</th><th>Fn</th></tr>
+<tr><td>Fixed C0</td><td>9.43%</td><td>3.91%</td><td>5.77%</td></tr>
+<tr><td>Neural 42</td><td>2.81%</td><td>1.29%</td><td>2.07%</td></tr>
+<tr><td>Neural 43</td><td>2.83%</td><td>1.30%</td><td>2.10%</td></tr>
+<tr><td>Neural 44</td><td>2.81%</td><td>1.29%</td><td>2.08%</td></tr>
+<tr><td>Neural mean (individual errors)</td><td>2.82%</td><td>1.29%</td><td>2.08%</td></tr>
+</table></div>
+<figure><img loading="lazy" alt="Known-inlet concentration curves" src="forward-curves.png"></figure>
+<h2>Noisy inverse reconstruction</h2>
+<div class="table"><table>
+<tr><th>Sites</th><th>C0 Th</th><th>Neural Th</th><th>C0 Fg</th><th>Neural Fg</th><th>C0 Fn</th><th>Neural Fn</th></tr>
+<tr><td>1</td><td>9.45%</td><td>7.94%</td><td>2.95%</td><td>1.51%</td><td>5.75%</td><td>4.35%</td></tr>
+<tr><td>2</td><td>9.49%</td><td>6.74%</td><td>2.94%</td><td>1.22%</td><td>5.48%</td><td>3.08%</td></tr>
+<tr><td>3</td><td>10.64%</td><td>6.56%</td><td>3.04%</td><td>1.21%</td><td>6.69%</td><td>2.97%</td></tr>
+</table></div>
+<figure><img loading="lazy" alt="Noisy field errors" src="errors-noisy.png"></figure>
+<div class="table"><table>
+<tr><th>Sites</th><th>C0 inlet, 0–0.82 s</th><th>Neural inlet, 0–0.82 s</th></tr>
+<tr><td>1</td><td>27.33%</td><td>29.99%</td></tr>
+<tr><td>2</td><td>30.41%</td><td>26.94%</td></tr>
+<tr><td>3</td><td>34.33%</td><td>25.95%</td></tr>
+</table></div>
+<h3>1 measurement site(s)</h3>
+<figure><img loading="lazy" alt="noisy inverse concentration curves, 1 sites" src="inverse-curves-1-noisy.png"></figure>
+<h3>2 measurement site(s)</h3>
+<figure><img loading="lazy" alt="noisy inverse concentration curves, 2 sites" src="inverse-curves-2-noisy.png"></figure>
+<h3>3 measurement site(s)</h3>
+<figure><img loading="lazy" alt="noisy inverse concentration curves, 3 sites" src="inverse-curves-3-noisy.png"></figure>
+<h2>Clean inverse reconstruction</h2>
+<div class="table"><table>
+<tr><th>Sites</th><th>C0 Th</th><th>Neural Th</th><th>C0 Fg</th><th>Neural Fg</th><th>C0 Fn</th><th>Neural Fn</th></tr>
+<tr><td>1</td><td>8.52%</td><td>3.73%</td><td>2.88%</td><td>1.32%</td><td>5.18%</td><td>2.48%</td></tr>
+<tr><td>2</td><td>9.39%</td><td>3.86%</td><td>2.91%</td><td>1.14%</td><td>5.37%</td><td>2.03%</td></tr>
+<tr><td>3</td><td>10.59%</td><td>4.12%</td><td>3.03%</td><td>1.13%</td><td>6.57%</td><td>2.06%</td></tr>
+</table></div>
+<figure><img loading="lazy" alt="Clean field errors" src="errors-clean.png"></figure>
+<div class="table"><table>
+<tr><th>Sites</th><th>C0 inlet, 0–0.82 s</th><th>Neural inlet, 0–0.82 s</th></tr>
+<tr><td>1</td><td>23.92%</td><td>8.22%</td></tr>
+<tr><td>2</td><td>30.40%</td><td>12.91%</td></tr>
+<tr><td>3</td><td>34.53%</td><td>14.28%</td></tr>
+</table></div>
+<h3>1 measurement site(s)</h3>
+<figure><img loading="lazy" alt="clean inverse concentration curves, 1 sites" src="inverse-curves-1-clean.png"></figure>
+<h3>2 measurement site(s)</h3>
+<figure><img loading="lazy" alt="clean inverse concentration curves, 2 sites" src="inverse-curves-2-clean.png"></figure>
+<h3>3 measurement site(s)</h3>
+<figure><img loading="lazy" alt="clean inverse concentration curves, 3 sites" src="inverse-curves-3-clean.png"></figure>
+<p>The figures above use the first test case by index and, for noisy figures, realization 1. They were not selected for the largest neural gain. The viewer includes every test case and all noise realizations. Gray dots are the observations used at the plotted site; panels without dots show unobserved locations/species.</p>
+<h2>Noisy errors in each vessel</h2>
+<div class="table"><table>
+<tr><th>Vessel</th><th>Sites</th><th>C0 Th</th><th>Neural Th</th><th>C0 Fg</th><th>Neural Fg</th><th>C0 Fn</th><th>Neural Fn</th></tr>
+<tr><td>parent</td><td>1</td><td>8.69%</td><td>8.03%</td><td>2.68%</td><td>1.07%</td><td>4.19%</td><td>4.12%</td></tr>
+<tr><td>parent</td><td>2</td><td>9.35%</td><td>6.92%</td><td>2.81%</td><td>0.94%</td><td>4.54%</td><td>2.94%</td></tr>
+<tr><td>parent</td><td>3</td><td>10.77%</td><td>6.73%</td><td>2.95%</td><td>0.93%</td><td>6.11%</td><td>2.82%</td></tr>
+<tr><td>daughter1</td><td>1</td><td>12.35%</td><td>7.62%</td><td>3.58%</td><td>2.72%</td><td>11.33%</td><td>6.58%</td></tr>
+<tr><td>daughter1</td><td>2</td><td>8.84%</td><td>5.56%</td><td>3.34%</td><td>2.09%</td><td>7.93%</td><td>4.33%</td></tr>
+<tr><td>daughter1</td><td>3</td><td>8.36%</td><td>5.56%</td><td>3.41%</td><td>2.07%</td><td>7.02%</td><td>4.28%</td></tr>
+<tr><td>daughter2</td><td>1</td><td>15.17%</td><td>4.27%</td><td>3.45%</td><td>1.04%</td><td>21.52%</td><td>4.04%</td></tr>
+<tr><td>daughter2</td><td>2</td><td>12.31%</td><td>2.87%</td><td>3.02%</td><td>0.80%</td><td>18.83%</td><td>2.73%</td></tr>
+<tr><td>daughter2</td><td>3</td><td>11.41%</td><td>2.62%</td><td>2.88%</td><td>0.73%</td><td>18.09%</td><td>2.46%</td></tr>
+</table></div>
+<h2>Paired uncertainty and interpretation</h2>
+<p>Paired 95% bootstrap intervals resample independent inlet cases after averaging the noise realizations and, for the three-vessel experiment, individual seed errors. Noise realizations and training seeds are not counted as extra independent test inlets.</p>
+<div class="table"><table>
+<tr><th>Sites</th><th>Species</th><th>Neural minus C0</th><th>95% interval</th><th>Cases favoring neural</th></tr>
+<tr><td>1</td><td>Th</td><td>-1.51 pp</td><td>[-2.34, -0.68] pp</td><td>12/16</td></tr>
+<tr><td>1</td><td>Fg</td><td>-1.44 pp</td><td>[-1.70, -1.19] pp</td><td>16/16</td></tr>
+<tr><td>1</td><td>Fn</td><td>-1.39 pp</td><td>[-2.07, -0.69] pp</td><td>13/16</td></tr>
+<tr><td>2</td><td>Th</td><td>-2.75 pp</td><td>[-3.88, -1.74] pp</td><td>15/16</td></tr>
+<tr><td>2</td><td>Fg</td><td>-1.71 pp</td><td>[-1.91, -1.52] pp</td><td>16/16</td></tr>
+<tr><td>2</td><td>Fn</td><td>-2.39 pp</td><td>[-3.04, -1.81] pp</td><td>16/16</td></tr>
+<tr><td>3</td><td>Th</td><td>-4.08 pp</td><td>[-5.58, -2.65] pp</td><td>15/16</td></tr>
+<tr><td>3</td><td>Fg</td><td>-1.83 pp</td><td>[-2.01, -1.67] pp</td><td>16/16</td></tr>
+<tr><td>3</td><td>Fn</td><td>-3.72 pp</td><td>[-5.14, -2.43] pp</td><td>16/16</td></tr>
+</table></div>
+<p>Species errors have different reference norms. In particular, Fg is initialized at 1 and continuously supplied at boundaries, so a small relative Fg concentration error should not be equated directly with a small error in Fg consumption or reaction rate.</p>
+<p>The inverse results are offline reconstruction using the full observation interval. They do not demonstrate prediction before those observations are available. All comparisons are conditional on the existing blood field and geometry, against the fixed basic C0 baseline. They are not new blind tests or comparisons against every calibrated numerical closure.</p>
+<h2>Preservation and reproducibility</h2>
+<p>All 190 protected original files, including existing reports, method locks, weights and saved inverse arrays, passed before/after SHA256 equality. The old inlet and Fn metrics were recomputed and checked to within 1e-12. All newly added species scores use the same prediction arrays and spatial/time weights.</p>
+<p>Only known-inlet forward replay uses the GPU. No neural training, inverse optimization or regularization retuning is performed. Both C0 and neural known-inlet replays use the unchanged frozen implementations.</p>
+<p>From this repository root and its existing isolated environment:</p>
+<pre>.venv/bin/python scripts/report_all_species.py --network three</pre>
+<ul>
+<li><a href="inverse-summary.csv">All inverse summary rows</a></li>
+<li><a href="inverse-per-case.csv">Per-case inverse errors, including per-vessel rows</a></li>
+<li><a href="forward-summary.csv">Known-inlet forward summary</a></li>
+<li><a href="forward-per-case.csv">Known-inlet per-case errors</a></li>
+<li><a href="paired.csv">Paired case bootstrap intervals</a></li>
+<li><a href="protocol.json">Fixed reporting protocol</a></li>
+<li><a href="replay-checks.json">Replay verification</a></li>
+<li><a href="integrity.json">Preservation verification</a></li>
+</ul>
+<p>Full-resolution float64 point curves, with case/method/species/site labels, are retained in runs/all-species-v3/all-concentration-curves.npz. The standalone HTML embeds the same sampled curves as float32 for display only. Plotting precision does not change any reported metric.</p></main></html>

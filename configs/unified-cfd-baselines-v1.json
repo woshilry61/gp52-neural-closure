@@ -1,0 +1,416 @@
+{
+  "version": "unified-cfd-baselines-v1",
+  "seed": 52703101,
+  "range": [
+    0.05,
+    1.15
+  ],
+  "train": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "validation": [
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79
+  ],
+  "test": [
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111
+  ],
+  "training_seeds": [
+    42,
+    43,
+    44
+  ],
+  "duration": 1.23,
+  "inlet_score_end": 0.82,
+  "concentration_score_end": 1.23,
+  "observation_times": [
+    0.002,
+    0.05539130434782609,
+    0.10878260869565218,
+    0.16217391304347828,
+    0.21556521739130435,
+    0.2689565217391304,
+    0.32234782608695656,
+    0.37573913043478263,
+    0.4291304347826087,
+    0.4825217391304348,
+    0.5359130434782609,
+    0.589304347826087,
+    0.6426956521739131,
+    0.6960869565217391,
+    0.7494782608695653,
+    0.8028695652173913,
+    0.8562608695652174,
+    0.9096521739130435,
+    0.9630434782608696,
+    1.0164347826086957,
+    1.0698260869565217,
+    1.123217391304348,
+    1.176608695652174,
+    1.23
+  ],
+  "noise_std": 0.02,
+  "noise_replicates": 3,
+  "noise_seed": 52703102,
+  "counts": {
+    "single": [
+      41
+    ],
+    "three": [
+      30,
+      10,
+      17
+    ]
+  },
+  "lengths": {
+    "single": [
+      0.06
+    ],
+    "three": [
+      0.06,
+      0.02,
+      0.034
+    ]
+  },
+  "sensors": {
+    "single": [
+      [
+        0,
+        0.03
+      ],
+      [
+        0,
+        0.006
+      ],
+      [
+        0,
+        0.054
+      ]
+    ],
+    "three": [
+      [
+        0,
+        0.03
+      ],
+      [
+        1,
+        0.01
+      ],
+      [
+        2,
+        0.017
+      ]
+    ]
+  },
+  "layouts": "Nested first 1, 2, or 3 sites. Single first site is midpoint.",
+  "reference": {
+    "diffusion": 0.0002,
+    "rate": 2.0,
+    "radial": 24,
+    "axial_refine": 4,
+    "dt": 0.001,
+    "scheme": "Conservative radial finite-volume, implicit transport, exact local reaction split",
+    "inlet": "Persistent upstream reservoir; distal backflow Th=0,Fg=1; Fn immobile",
+    "junction": "Zero-volume perfectly mixed node for three vessels"
+  },
+  "scoring": "Per-case relative L2, reference cell-volume and trapezoidal-time weights; average cases equally",
+  "inverse": {
+    "bounds": [
+      0.0,
+      1.2
+    ],
+    "lambdas": [
+      0.0,
+      0.0001,
+      0.01
+    ],
+    "starts": 3,
+    "max_iterations": 100,
+    "projected_gradient_tolerance": 1e-08,
+    "selection": "Per-method validation mean inlet error across all layouts/noise; never test"
+  },
+  "training": {
+    "single_transport_steps": 1500,
+    "single_reaction_source_steps": 1000,
+    "single_reaction_steps": 500,
+    "single_reaction_weights": [
+      0.03,
+      0.3,
+      3.0
+    ],
+    "three_steps_per_head": 3000,
+    "architecture": "Original per-topology architecture and respective original losses retained",
+    "initialization": "Fresh random parameters; no old checkpoint initialization",
+    "selection": "Validation only; identical case split and common scoring across topologies",
+    "single_batch_cases": 16,
+    "single_order": "Seeded shuffle; every four optimizer updates cover all 64 training cases",
+    "throughput_pilot": "A full-64-case pilot was stopped after measuring ~1 second/update; no test data inspected; its weights are not used for initialization or selection."
+  },
+  "scope": "Fixed independent blood flow per topology; new biochemical inlet curves, not unseen-flow generalization",
+  "inlets_sha256": "7a474492bd3e509dd491127e4d7a04b4aca7a48acc33dc468157424a07406800",
+  "networks": {
+    "single": {
+      "inlet_nodes": [
+        0
+      ],
+      "outlet_nodes": [
+        1
+      ],
+      "lengths": [
+        0.06
+      ],
+      "counts": [
+        41
+      ],
+      "source_files": [
+        1
+      ],
+      "sensors": [
+        [
+          0,
+          0.03
+        ],
+        [
+          0,
+          0.006
+        ],
+        [
+          0,
+          0.054
+        ]
+      ],
+      "status": "active"
+    },
+    "three": {
+      "inlet_nodes": [
+        0,
+        1,
+        1
+      ],
+      "outlet_nodes": [
+        1,
+        2,
+        3
+      ],
+      "lengths": [
+        0.06,
+        0.02,
+        0.034
+      ],
+      "counts": [
+        30,
+        10,
+        17
+      ],
+      "source_files": [
+        1,
+        2,
+        3
+      ],
+      "sensors": [
+        [
+          0,
+          0.03
+        ],
+        [
+          1,
+          0.01
+        ],
+        [
+          2,
+          0.017
+        ]
+      ],
+      "status": "active"
+    },
+    "seven": {
+      "inlet_nodes": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ],
+      "outlet_nodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "lengths": [
+        0.06,
+        0.02,
+        0.034,
+        0.039,
+        0.139,
+        0.034,
+        0.094
+      ],
+      "counts": [
+        30,
+        10,
+        17,
+        20,
+        70,
+        17,
+        47
+      ],
+      "source_files": [
+        1,
+        2,
+        3,
+        6,
+        7,
+        4,
+        5
+      ],
+      "sensors": [
+        [
+          0,
+          0.03
+        ],
+        [
+          3,
+          0.0195
+        ],
+        [
+          6,
+          0.047
+        ]
+      ],
+      "status": "active: independent CFD, three-seed training and evaluation required"
+    }
+  },
+  "future_seven": "Same inlets, split, generator, observation schedule, noise, optimizer and scoring. Geometry/topology from pinned Sen seven-vessel source. Primary sites preset by topology, not test performance. No seven-vessel training or CFD claim in this run.",
+  "c0": {
+    "physics": "Conservative one-dimensional finite volume; molecular diffusion D=2e-4; reaction 2 Th Fg; no memory or learned correction",
+    "single": "Existing single-c0-fv-v1: implicit transport/reaction",
+    "three": "Existing three-vessel C0: implicit transport followed by exact local reaction",
+    "calibration": "No fitted closure coefficients; only inlet regularization selected on the common validation set",
+    "note": "Existing per-topology time discretizations retained; common equations and shared 2 ms candidate time grid. Reference uses the common 1 ms resolved solver."
+  },
+  "architecture_source_sha256": {
+    "src/gp52/transport.py": "987f34e9b1f5d656b4cd1c34c29b8d1dfb19715655799abdb09513e3f2cba583",
+    "src/gp52/reaction.py": "6a221e2940e5ae4a319a8d7e1dfbdcd5a35598625afbb9359e2d7c4111b73c7b",
+    "src/gp52/networks.py": "e09c38ab6cc122ca7423f8792aa0623bfcbd91a9dca97b2d22b82572d3f81356",
+    "src/gp52/three/closure.py": "d0a60e247e9d623fa9d0cf794c1c570b599349dafc6d4bfef30c24bace60ecaa",
+    "src/gp52/three/evaluate.py": "8297481ac5313e84dfa57dc30706ee3ee81023d06c4b11f91f618917b4f72d4e",
+    "src/gp52/unified/single_c0.py": "653f668579e5bf89a26eb359ed101cade3f40284d83bc4e08b3a91839ef15b12"
+  },
+  "seven_training": "Reuse the original three-vessel heads, widths, layers, two-memory transport and physical moment losses; only topology adjacency and numerical operator dimensions change. Same 64/16/32 cases and seeds 42/43/44.",
+  "inference_precision": "FP64 transport, reaction features and reaction head; same trained weights. Branched graph adjacency is applied sparsely with verified equality to its dense operator.",
+  "precision_validation": "A pre-test three-vessel FP32 validation diagnostic exhibited projected-gradient stagnation near 1e-7; final three-vessel validation is rerun in FP64 without changing architectures, checkpoints, splits, objectives or stopping rules."
+}

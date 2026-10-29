@@ -1,0 +1,159 @@
+{
+  "protected_files": 18,
+  "changed_protected_files": [],
+  "replayed_fits": 1536,
+  "replay_minimum": 0.0,
+  "replay_mass_balance_max": 2.930028361115315e-14,
+  "gpu": [
+    {
+      "path": "runs/inverse-three/gpu-validation.csv",
+      "samples": 46,
+      "utilization_mean": 90.02173913043478,
+      "utilization_max": 100.0,
+      "peak_memory_MiB": 16114.0,
+      "peak_power_W": 513.03
+    },
+    {
+      "path": "runs/inverse-three/gpu-test.csv",
+      "samples": 34,
+      "utilization_mean": 65.32352941176471,
+      "utilization_max": 100.0,
+      "peak_memory_MiB": 11372.0,
+      "peak_power_W": 501.17
+    },
+    {
+      "path": "runs/inverse-three/long-window/gpu-validation.csv",
+      "samples": 43,
+      "utilization_mean": 91.67441860465117,
+      "utilization_max": 100.0,
+      "peak_memory_MiB": 16114.0,
+      "peak_power_W": 508.26
+    },
+    {
+      "path": "runs/inverse-three/long-window/gpu-test.csv",
+      "samples": 36,
+      "utilization_mean": 63.833333333333336,
+      "utilization_max": 100.0,
+      "peak_memory_MiB": 11372.0,
+      "peak_power_W": 504.53
+    },
+    {
+      "path": "runs/inverse-three/gpu-precision.csv",
+      "samples": 189,
+      "utilization_mean": 81.68253968253968,
+      "utilization_max": 100.0,
+      "peak_memory_MiB": 12704.0,
+      "peak_power_W": 330.62
+    },
+    {
+      "path": "runs/inverse-three/gpu-tuned.csv",
+      "samples": 102,
+      "utilization_mean": 81.09803921568627,
+      "utilization_max": 100.0,
+      "peak_memory_MiB": 13814.0,
+      "peak_power_W": 327.75
+    }
+  ],
+  "precision": {
+    "0.82": {
+      "ordinary_1d": {
+        "max_cpu_difference_by_species": [
+          1.887379141862766e-15,
+          2.708944180085382e-14,
+          6.838973831690964e-14
+        ],
+        "selected_pg_max": 1.8485035724324916e-10,
+        "selected_pg_over_1e8": 0,
+        "selected_pg_over_1e6": 0,
+        "max_amplitude_change": 0.016326388303766662,
+        "seconds": 5.241198753938079
+      },
+      "neural_42": {
+        "max_cpu_difference_by_species": [
+          1.2397257886931357e-08,
+          8.532969109076305e-09,
+          6.832337362538965e-09
+        ],
+        "selected_pg_max": 7.222628339853543e-08,
+        "selected_pg_over_1e8": 29,
+        "selected_pg_over_1e6": 0,
+        "max_amplitude_change": 0.016545474633361312,
+        "seconds": 22.298896741005592
+      },
+      "neural_43": {
+        "max_cpu_difference_by_species": [
+          1.2225231493800948e-08,
+          8.925500782908102e-09,
+          6.863507984178341e-09
+        ],
+        "selected_pg_max": 2.2690922052426288e-07,
+        "selected_pg_over_1e8": 35,
+        "selected_pg_over_1e6": 0,
+        "max_amplitude_change": 0.02802883857712335,
+        "seconds": 24.67040092300158
+      },
+      "neural_44": {
+        "max_cpu_difference_by_species": [
+          1.2664264303907657e-08,
+          8.995865719008123e-09,
+          6.609782721156421e-09
+        ],
+        "selected_pg_max": 1.6187322615657251e-07,
+        "selected_pg_over_1e8": 29,
+        "selected_pg_over_1e6": 0,
+        "max_amplitude_change": 0.019831984666375924,
+        "seconds": 23.562105656019412
+      }
+    },
+    "1.23": {
+      "ordinary_1d": {
+        "max_cpu_difference_by_species": [
+          1.887379141862766e-15,
+          2.708944180085382e-14,
+          6.838973831690964e-14
+        ],
+        "selected_pg_max": 3.944913284925633e-10,
+        "selected_pg_over_1e8": 0,
+        "selected_pg_over_1e6": 0,
+        "max_amplitude_change": 0.016076083703136734,
+        "seconds": 6.660602135001682
+      },
+      "neural_42": {
+        "max_cpu_difference_by_species": [
+          1.2397257886931357e-08,
+          8.532969109076305e-09,
+          6.832337362538965e-09
+        ],
+        "selected_pg_max": 7.972945059719905e-08,
+        "selected_pg_over_1e8": 18,
+        "selected_pg_over_1e6": 0,
+        "max_amplitude_change": 0.00829907289093379,
+        "seconds": 23.676259910105728
+      },
+      "neural_43": {
+        "max_cpu_difference_by_species": [
+          1.2225231493800948e-08,
+          8.925500782908102e-09,
+          6.863507984178341e-09
+        ],
+        "selected_pg_max": 3.26753308854677e-08,
+        "selected_pg_over_1e8": 18,
+        "selected_pg_over_1e6": 0,
+        "max_amplitude_change": 0.010068709051637259,
+        "seconds": 23.482663213973865
+      },
+      "neural_44": {
+        "max_cpu_difference_by_species": [
+          1.2664264303907657e-08,
+          8.995865719008123e-09,
+          6.609782721156421e-09
+        ],
+        "selected_pg_max": 6.337069801548578e-08,
+        "selected_pg_over_1e8": 15,
+        "selected_pg_over_1e6": 0,
+        "max_amplitude_change": 0.008813761703524936,
+        "seconds": 21.90656679100357
+      }
+    }
+  }
+}

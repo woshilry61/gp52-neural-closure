@@ -1,0 +1,76 @@
+{
+  "version": "all-species-v3",
+  "network": "three",
+  "baseline_id": "three-c0-fv-v1",
+  "methods": [
+    "C0",
+    "neural_42",
+    "neural_43",
+    "neural_44"
+  ],
+  "observation_species": [
+    "Th",
+    "Fg"
+  ],
+  "observations_per_species_per_site": 24,
+  "observation_end_s": 1.23,
+  "inlet_score_interval_s": [
+    0,
+    0.82
+  ],
+  "all_species_score_interval_s": [
+    0,
+    1.23
+  ],
+  "spatial_weight": "shared fixed blood-flow cell volume",
+  "time_weight": "equal samples",
+  "case_ids": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "sensor_site_positions_m": [
+    0.03,
+    0.01,
+    0.017
+  ],
+  "sensor_site_labels": [
+    "Parent: 30 mm",
+    "Daughter 1: 10 mm",
+    "Daughter 2: 17 mm"
+  ],
+  "nested_layout_site_indices": {
+    "1": [
+      0
+    ],
+    "2": [
+      0,
+      1
+    ],
+    "3": [
+      0,
+      1,
+      2
+    ]
+  },
+  "noise_absolute_std": 0.02,
+  "noisy_realizations": 3,
+  "training": false,
+  "inverse_refitting": false,
+  "regularization_retuning": false,
+  "first_case_curve_selection": "first by existing case index, not performance",
+  "noisy_figure_realization": 1
+}
